@@ -29,6 +29,6 @@ EaterVerse is an innovative web application designed to connect restaurant enthu
 
 - Flask, PostgreSQL, Alembic, React.js, JSON Web Tokens (JWT)
 
-## Deployment through Render.com
+## Eater-verse Live Link
 
-[ Get from Robbie ]
+[https://eater-verse-1.onrender.com]
