@@ -31,4 +31,4 @@ EaterVerse is an innovative web application designed to connect restaurant enthu
 
 ## Eater-verse Live Link
 
-[https://eater-verse-1.onrender.com]
+[[https://eater-verse-1.onrender.com]](https://eaterverse.onrender.com)
