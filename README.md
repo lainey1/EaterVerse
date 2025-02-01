@@ -20,6 +20,7 @@
 - **[Wireframes](https://github.com/lainey1/eaterverse/wiki/Wireframe-%E2%80%90-Figma):** Visual representations of the app’s user interface, showcasing restaurant listings, detail pages, reservations, and user reviews.
 
 📸 Screenshots
+
 Coming soon!
 
 
