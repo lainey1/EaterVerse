@@ -14,9 +14,9 @@ Eaterverse ([https://eaterverse.onrender.com](https://eaterverse.onrender.com)) 
 - **Alembic:** Database migrations for version control.
 - **React.js:** Dynamic and responsive user interface for a seamless user experience.
 
-##c📂 Documentation
+## 📂 Documentation
 - **[README](https://github.com/lainey1/eaterverse/edit/main/README.md):** Overview of the project, setup instructions, and technical details.
-- **[API Documentation[(https://github.com/lainey1/eaterverse/wiki/API-Documentation):** Detailed explanations of available endpoints, parameters, and responses.
+- **[API Documentation](https://github.com/lainey1/eaterverse/wiki/API-Documentation):** Detailed explanations of available endpoints, parameters, and responses.
 - **[Wireframes](https://github.com/lainey1/eaterverse/wiki/Wireframe-%E2%80%90-Figma):** Visual representations of the app’s user interface, showcasing restaurant listings, detail pages, reservations, and user reviews.
 
 📸 Screenshots
@@ -25,37 +25,37 @@ Showcase coming soon! Stay tuned for images of the app in action.
 ## 🚀 Getting Started
 
 ### Live Version
-- Check out the live version: [https://eater-verse-1.onrender.com](https://eater-verse-1.onrender.com)
+- Check out the live version: [https://eater-verse-1.onrender.com](https://eaterverse.onrender.com)
 
 ### Running Locally
 1. Clone the repository:
 
-```
-git clone https://github.com/yourusername/eaterverse.git
-cd eaterverse
-```
+    ```
+    git clone https://github.com/lainey1/eaterverse.git
+    cd eaterverse
+    ```
 
 2. Install dependencies:
 
-```
-# Backend
-cd backend
-pipenv install -r requirements.txt
-
-# Frontend
-cd frontend
-npm install
-```
+    ```
+    # Backend
+    cd backend
+    pipenv install -r requirements.txt
+    
+    # Frontend
+    cd frontend
+    npm install
+    ```
 
 3. Start the application:
-
-```
-# Backend server
-flask run
-
-# Frontend development server
-npm start
-```
+  
+    ```
+    # Backend server
+    flask run
+    
+    # Frontend development server
+    npm start
+    ```
 
 ## 🌟 Future Enhancements
 - AWS S3 Integration: Attach images to highlight restaurant ambiance and dishes.
