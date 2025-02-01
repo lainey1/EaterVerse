@@ -1,5 +1,5 @@
 # 🍽️ Eaterverse: Restaurant Discovery and Management Platform 🍽️
-Eaterverse ([https://eaterverse.onrender.com](https://eaterverse.onrender.com)) is an innovative web application designed to connect restaurant enthusiasts with exceptional dining experiences while empowering business owners to manage their restaurants effectively. 
+[Eaterverse](https://eaterverse.onrender.com) is an innovative web application designed to connect restaurant enthusiasts with exceptional dining experiences while empowering business owners to manage their restaurants effectively. ([https://eaterverse.onrender.com](https://eaterverse.onrender.com))
 
 ## 🥂 Key Features 🍴
 - **User Accounts:** Secure login and registration for both restaurant owners and diners.
