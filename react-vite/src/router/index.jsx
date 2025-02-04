@@ -16,6 +16,7 @@ import ManageReservations from "../components/Reservations/ManageReservations";
 import ReservationsByRestaurant from "../components/Reservations/ReservationsByRestaurant";
 import UpdateReservations from "../components/Reservations/UpdateReservations";
 import UserReservations from "../components/Reservations/UserReservations";
+import DeleteProfile from "../components/UserProfile/DeleteProfile";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
         element: <NotFound />,
       },
       {
+        path: "user/:userId/delete",
+        element: <DeleteProfile />,
+      },
+      {
         path: "restaurants/:restaurantId/edit",
         element: <UpdateRestaurant />,
       },
@@ -97,8 +102,6 @@ export const router = createBrowserRouter([
         path: "/restaurants/:restaurantId/images",
         element: <RestaurantImages />,
       },
-
-
       {
         path: "reservations/user",
         element: <UserReservations />,
@@ -119,8 +122,6 @@ export const router = createBrowserRouter([
         path: "/reservations/:reservationId/edit",
         element: <UpdateReservations />,
       },
-
-
     ],
   },
 ]);
