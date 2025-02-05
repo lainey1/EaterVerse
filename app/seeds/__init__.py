@@ -3,7 +3,6 @@ from .users import seed_users, undo_users
 from .restaurants import seed_restaurants, undo_restaurants
 from .reviews import seed_reviews, undo_reviews
 from .reservations import seed_reservations, undo_reservations
-from .review_images import seed_review_image, undo_review_image
 from .restaurant_images import seed_restaurant_image, undo_restaurant_image
 from app.models.db import db, environment, SCHEMA
 
@@ -24,13 +23,11 @@ def seed():
         undo_restaurants()
         undo_reviews()
         undo_reservations()
-        undo_review_image()
         undo_restaurant_image()
     seed_users()
     seed_restaurants()
     seed_reviews()
     seed_reservations()
-    seed_review_image()
     seed_restaurant_image()
 
     # Add other seed functions here
@@ -43,7 +40,6 @@ def undo():
     undo_restaurants()
     undo_reviews()
     undo_reservations()
-    undo_review_image()
     undo_restaurant_image()
 
     # Add other undo functions here
