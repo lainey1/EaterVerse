@@ -1,4 +1,6 @@
-body {
+body,
+html,
+* {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   color: #4c5b61;

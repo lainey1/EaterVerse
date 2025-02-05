@@ -31,9 +31,8 @@ body {
 
 .user-avatar {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
+  width: 250px;
+  height: 250px;
 }
 
 .profile-link {
