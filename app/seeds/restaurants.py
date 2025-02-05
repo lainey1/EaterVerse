@@ -10,9 +10,9 @@ def seed_restaurants():
         city='Chicago',
         state='IL',
         country='USA',
-        phone_number='312-929-4580',
+        phone_number='(312) 929-4580',
         email='contact@auchevalchicago.com',
-        website='auchevaldiner.com/chicago',
+        website='https://www.auchevaldiner.com',
         hours={
             "Monday": ["10:00 AM", "11:15 PM"],
             "Tuesday": ["10:00 AM", "11:15 PM"],
@@ -33,7 +33,7 @@ def seed_restaurants():
         city='San Francisco',
         state='CA',
         country='USA',
-        phone_number='415-835-9888',
+        phone_number='(415) 835-9888',
         email='info@tonyspizzanapoletana.com',
         website='https://tonyspizzanapoletana.com/',
         hours={
@@ -56,9 +56,9 @@ def seed_restaurants():
         city='New York',
         state='NY',
         country='USA',
-        phone_number='212-564-4409',
+        phone_number='(212) 564-4409',
         email='bestbagel@gmail.com ',
-        website='bestbagelandcoffee.com',
+        website='https://www.bestbagelandcoffee.com',
         hours={
             "Monday": ["6:00 AM", "4:00 PM"],
             "Tuesday": ["6:00 AM", "4:00 PM"],
@@ -79,7 +79,7 @@ def seed_restaurants():
         city='Cincinnati',
         state='OH',
         country='USA',
-        phone_number='513-802-5007',
+        phone_number='(513) 802-5007',
         email='',
         website='https://www.eaglerestaurant.com/',
         hours={

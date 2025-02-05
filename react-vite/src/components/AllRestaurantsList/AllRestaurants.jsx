@@ -78,7 +78,6 @@ function AllRestaurants() {
                   </div>
                 </Link>
               </div>
-              <hr />
             </>
           );
         })}

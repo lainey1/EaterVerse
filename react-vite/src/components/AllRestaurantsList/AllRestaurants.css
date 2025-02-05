@@ -14,7 +14,7 @@
 .restaurants-grid {
   display: grid;
   column-count: 4;
-  column-gap: 15px;
+  gap: 5px;
 }
 
 .restaurant-tile {
