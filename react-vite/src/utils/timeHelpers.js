@@ -30,5 +30,5 @@ export const formatTimeAgo = (updatedAt) => {
     return `${Math.floor(diffInMinutes)} minute${
       diffInMinutes > 1 ? "s" : ""
     } ago`;
-  return "Just now";
+  return "just now";
 };

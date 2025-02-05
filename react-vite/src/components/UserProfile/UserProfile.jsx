@@ -9,6 +9,7 @@ import ManageReservations from "../Reservations/ManageReservations";
 import DeleteProfile from "./DeleteProfile";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { thunkAuthenticate } from "../../redux/session";
+import defaultAvatar from "../../../public/icon_eaterverse_transparent.png";
 import "./UserProfile.css";
 
 function UserProfile() {
@@ -37,8 +38,8 @@ function UserProfile() {
       <div className="sidebar">
         <div className="user-info">
           <img
-            src="https://via.placeholder.com/150"
-            alt="user-avatar"
+            src={defaultAvatar}
+            alt="default-user-avatar"
             className="user-avatar"
           />
           <h2>{currentUser.username}</h2>

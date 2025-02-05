@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./ManageReservations.css";
 
 const ManageReservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -66,32 +67,63 @@ const ManageReservations = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h1>Your Reservations</h1>
-      <ul>
+    <div id="manage-reservations-section">
+      <h2>Your Reservations</h2>
+      <div>
         {reservations.length === 0 ? (
           <p>No reservations found.</p>
         ) : (
           reservations.map((reservation) => (
-            <li key={reservation.id}>
-              <p>Date: {new Date(reservation.date).toLocaleString()}</p>
-              <p>Party Size: {reservation.party_size}</p>
-              <button
-                onClick={() => handleOnClick(reservation.id)}
-                disabled={loading} // Disable button while loading
-              >
-                {loading ? "Deleting..." : "Delete Reservation"}
-              </button>
-              <button
-                onClick={() => updatedOnClick(reservation.id)}
-                disabled={loading} // Disable button while loading
-              >
-                {loading ? "Loading..." : "Update Reservation"}
-              </button>
-            </li>
+            <div key={reservation.id} className="reservation-item">
+              <div className="restaurant-image">
+                {reservation.restaurant.preview_image ? (
+                  <img
+                    src={reservation.restaurant?.preview_image}
+                    alt={reservation.restaurant?.name}
+                  />
+                ) : (
+                  <div>No Image Available</div>
+                )}
+              </div>
+              <div className="restaurant-details">
+                <h3>{reservation.restaurant.name}</h3>
+                <p>
+                  <strong>Date: </strong>
+                  {new Date(reservation.date).toLocaleString("en-US", {
+                    weekday: "long",
+                    month: "2-digit",
+                    day: "2-digit",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                    timeZoneName: "short",
+                  })}
+                </p>
+
+                <p>
+                  <strong>Party Size: </strong>
+                  {reservation.party_size}
+                </p>
+              </div>
+              <span className="manage-buttons">
+                <button
+                  onClick={() => updatedOnClick(reservation.id)}
+                  disabled={loading} // Disable button while loading
+                >
+                  {loading ? "Loading..." : "Update "}
+                </button>
+                <button
+                  onClick={() => handleOnClick(reservation.id)}
+                  disabled={loading} // Disable button while loading
+                >
+                  {loading ? "Deleting..." : "Delete"}
+                </button>
+              </span>
+            </div>
           ))
         )}
-      </ul>
+      </div>
     </div>
   );
 };

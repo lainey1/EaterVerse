@@ -1,3 +1,9 @@
+#all-restaurants-page {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 #eaterverse-banner {
   width: 100%;
   height: auto;
@@ -5,91 +11,74 @@
   margin-bottom: 5px;
 }
 
-/* Grid Container */
 .restaurants-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 0 5%;
+  column-count: 4;
+  column-gap: 15px;
 }
 
-.restaurant-tile:hover .restaurant-name {
-  opacity: 1;
+.restaurant-tile {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-/* ================================
-   Image Tiles
-================================ */
-/* Restaurant Image Container */
-.restaurant-image-container {
+.restaurant-tile:hover {
+  transform: scale(1.02);
+}
+
+.restaurant-link {
+  text-decoration: none;
+  color: inherit;
   display: block;
-  width: 100%;
-  min-height: 33vh; /* Set a minimum height instead of fixed height */
-  border-radius: 0.5rem;
-  margin: 0 auto;
-  display: flex; /* Align placeholder content (optional) */
-  justify-content: center;
-  align-items: center;
-  color: #333; /* text color for placeholder */
-  overflow: hidden; /* Prevents overflow if the image is too large */
 }
 
-/* Restaurant Image */
+.restaurant-image-container {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: white;
+}
+
 .restaurant-image {
   width: 100%;
-  height: 100%; /* Ensure the image fills the container */
-  object-fit: cover; /* Ensures the image covers the container */
-  object-position: center;
-  border-radius: 0.5rem;
-}
-
-/* When there's no image, show a placeholder */
-.restaurant-image[alt=""] {
-  display: none; /* Hide the image element when alt is empty */
-}
-
-/* Restaurant Link */
-.restaurant-link,
-.restaurant-link a {
+  height: 100%;
+  object-fit: cover;
   display: block;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  color: #333;
 }
 
-/* Restaurant Name Overlay */
-.restaurant-name {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-/* Restaurant Details Container */
 .restaurant-details {
-  margin-top: auto; /* Pushes this container to the bottom of the tile */
-  text-align: left;
-  padding-top: 1rem;
+  padding: 15px;
+}
+
+.restaurant-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .rating-line {
   display: flex;
   align-items: center;
-  font-weight: bold;
-  gap: 0.5em;
+  gap: 5px;
+  font-size: 14px;
 }
 
 #restaurant-price-location {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-/* Restaurant Location and Rating */
 .restaurant-location {
   display: flex;
   align-items: center;
-  font-size: 1rem;
-  color: #333;
-  font-weight: bold;
-  margin: 0;
+  gap: 5px;
 }
 
 /*
@@ -97,20 +86,38 @@
      Responsive Layouts
   ================================ */
 
-@media (min-width: 700px) {
+@media (max-width: 1400px) {
   .restaurants-grid {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 5;
+    column-gap: 15px;
+  }
+}
+@media (max-width: 1300px) {
+  .restaurants-grid {
+    column-count: 4;
+    column-gap: 15px;
   }
 }
 
-@media (min-width: 1000px) {
+/* Tablet size (portrait or medium screens) */
+@media (max-width: 1024px) {
   .restaurants-grid {
-    grid-template-columns: repeat(3, 1fr);
+    column-count: 3;
+    column-gap: 15px;
   }
 }
 
-@media (min-width: 1200px) {
+/* Mobile size */
+@media (max-width: 768px) {
   .restaurants-grid {
-    grid-template-columns: repeat(4, 1fr);
+    column-count: 2;
+    column-gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .restaurants-grid {
+    column-count: 1;
+    column-gap: 15px;
   }
 }

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../redux/review";
-import { FaStar } from "react-icons/fa6";
 import OpenModalButton from "../OpenModalButton";
 import EditReviewModal from "./EditReviewModal";
 import DeleteReviewModal from "./DeleteReviewModal";
 import { thunkFetchAllImages } from "../../redux/restaurantImages";
 import "./ReviewsUser.css";
+import StarRating from "../StarRating";
 
 function ReviewsUser() {
   const dispatch = useDispatch();
@@ -38,8 +38,8 @@ function ReviewsUser() {
   }
 
   return (
-    <div className="reviews-section">
-      <h3>Your Reviews</h3>
+    <div id="reviews-section">
+      <h2>Your Reviews</h2>
       {reviews.length > 0 ? (
         reviews.map((review) => {
           const restaurantImage = restaurantImages?.find(
@@ -47,25 +47,9 @@ function ReviewsUser() {
           );
 
           return (
-            <div key={review.id} className="review-item">
-              <div className="review-top">
-                <span className="restaurant-image">
-                  <div>
-                    {restaurantImage ? (
-                      <img src={restaurantImage.url} alt="restaurant" />
-                    ) : (
-                      <p>No image found</p>
-                    )}
-                  </div>
-                </span>
-                <span className="review-restaurant">
-                  <p className="restaurant-name">{review.restaurant?.name}</p>
-                  <p className="restaurant-location">
-                    {review.restaurant?.city}, {review.restaurant?.state}{" "}
-                    {review.restaurant?.country}
-                  </p>
-                </span>
-                <span className="review-buttons">
+            <>
+              <div key={review.id} className="review-item">
+                <div className="review-buttons">
                   <OpenModalButton
                     modalComponent={<EditReviewModal review={review} />}
                     buttonText="Edit"
@@ -74,15 +58,30 @@ function ReviewsUser() {
                     modalComponent={<DeleteReviewModal review={review} />}
                     buttonText="Delete"
                   />
-                </span>
+                </div>
+                <div className="review-left">
+                  <span className="restaurant-image">
+                    {restaurantImage ? (
+                      <img src={restaurantImage.url} alt="restaurant" />
+                    ) : (
+                      <p>No image found</p>
+                    )}
+                  </span>
+                  <div className="review-restaurant">
+                    <br />
+                    <p className="restaurant-name">{review.restaurant?.name}</p>
+                    <p className="restaurant-location">
+                      {review.restaurant?.city}, {review.restaurant?.state}{" "}
+                      {review.restaurant?.country}
+                    </p>
+                    <div className="review-star-and-text">
+                      <StarRating rating={review.stars} />
+                      <p>{review.review}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="review-star-and-text">
-                {Array.from({ length: review.stars }).map((_, index) => (
-                  <FaStar key={index} style={{ color: "#e26d12" }} />
-                ))}
-                <p>{review.review}</p>
-              </div>
-            </div>
+            </>
           );
         })
       ) : (

@@ -27,7 +27,7 @@ def user_reservations():
     """
     Query for all reservations of the current user and returns them in a list of reservation dictionaries
     """
-    print(current_user.id)
+    # print(current_user.id)
     reservations = Reservation.query.filter(Reservation.user_id == current_user.id).all()
     return {'reservations': [reservation.to_dict() for reservation in reservations]}
 
