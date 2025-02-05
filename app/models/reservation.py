@@ -1,6 +1,10 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+from flask_sqlalchemy import SQLAlchemy
+
+from .db import SCHEMA, add_prefix_for_prod, db, environment
+from .restaurant import Restaurant
+
 
 class Reservation(db.Model):
     __tablename__ = 'reservations'
@@ -18,6 +22,7 @@ class Reservation(db.Model):
     # user = db.relationship('User', backref='reservations')
     user = db.relationship('User', backref='reservations', lazy='joined')
 
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -26,5 +31,6 @@ class Reservation(db.Model):
             'date': self.date.strftime('%Y-%m-%d %H:%M:%S'),
             'party_size': self.party_size,
             'name': self.restaurant.name if self.restaurant else None,
-            'username': self.user.username if self.user else None
+            'username': self.user.username if self.user else None,
+            'restaurant': self.restaurant.to_dict() if self.restaurant else None,
         }

@@ -1,48 +1,17 @@
 .profile-overview {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Favorite Cuisine Section */
-.favorite-cuisine {
+.overview-details {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
 }
 
-.favorite-cuisine h4 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.favorite-cuisine p {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
-}
-
-/* Location Section */
-.user-location {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.user-location h4 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.user-location p {
-  margin: 5px 0 0;
-  font-size: 16px;
-  color: #555;
+.overview-detail {
+  width: 25%;
 }
 
 /* Review Rating Distribution Placeholder (optional for future use) */

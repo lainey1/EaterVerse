@@ -1,9 +1,9 @@
 body,
-html,
-* {
+html {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   color: #4c5b61;
+  background-color: #ecf2fd; /* Light blue background */
 }
 
 button {

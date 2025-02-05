@@ -50,6 +50,11 @@ class Restaurant(db.Model):
 
 
     def to_dict(self, form=None):
+
+        preview_image = next(
+        (image for image in self.restaurant_images if image.is_preview), None
+        )
+
         # Initialize the dictionary with all other fields
         restaurants_dict = {
             "id": self.id,
@@ -65,7 +70,7 @@ class Restaurant(db.Model):
             "cuisine": self.cuisine,
             "price_point": self.price_point,
             "description": self.description,
-            "restaurant_images": [image.to_dict() for image in self.restaurant_images],
+            'preview_image': preview_image.url if preview_image else None,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }

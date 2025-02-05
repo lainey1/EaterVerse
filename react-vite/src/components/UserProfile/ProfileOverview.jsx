@@ -3,22 +3,26 @@ import "./ProfileOverview.css";
 
 function ProfileOverview({ user }) {
   return (
-    <div className="profile-overview">
-      <h3 style={{ color: "#8c183e", fontSize: "2em" }}>
-        Welcome, {user.username}!
-      </h3>
+    <div>
+      <div className="profile-overview">
+        <h3 style={{ color: "#8c183e", fontSize: "2em" }}>
+          Welcome, {user.username}!
+        </h3>
 
-      {/* Favorite Cuisine */}
-      <div className="favorite-cuisine">
-        <h4 style={{ color: "#8c183e" }}>Favorite Cuisine:</h4>
-        <p>{user.favorite_cuisine || "No favorite cuisine added yet."}</p>
-      </div>
+        <div className="overview-details">
+          {/* Favorite Cuisine */}
+          <div className="overview-detail">
+            <h4 style={{ color: "#8c183e" }}>Favorite Cuisine:</h4>
+            <p>{user.favorite_cuisine || "No favorite cuisine added yet."}</p>
+          </div>
 
-      {/* Location */}
-      <div className="user-location">
-        <h4 style={{ color: "#8c183e" }}>Location:</h4>
+          {/* Location */}
+          <div className="overview-detail">
+            <h4 style={{ color: "#8c183e" }}>Location:</h4>
 
-        <p>{user.location || "Location not specified."}</p>
+            <p>{user.location || "Location not specified."}</p>
+          </div>
+        </div>
       </div>
       {/* Review Rating Distribution Graph */}
       {/* <div className="review-distribution">

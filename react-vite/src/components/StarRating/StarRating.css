@@ -1,8 +1,6 @@
 .star-rating {
   display: flex;
   gap: 0.2em;
-  justify-content: center;
-  align-items: center;
 }
 
 .star {
@@ -11,11 +9,11 @@
 }
 
 .star.filled {
-  color: #ffd700; /* Gold color for filled stars */
+  color: #e26d12; /* Gold color for filled stars */
 }
 
 .star.half-filled {
-  color: #ffd700; /* Gold color for half-filled stars */
+  color: #e26d12; /* Gold color for half-filled stars */
 }
 
 .star.empty {

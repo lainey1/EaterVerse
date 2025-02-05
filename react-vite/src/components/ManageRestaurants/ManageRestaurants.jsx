@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteRestaurant from "./DeleteRestaurant";
 import { fetchAllRestaurantsThunk } from "../../redux/restaurants";
@@ -20,7 +20,6 @@ function ManageRestaurants() {
   const userRestaurants = restaurants?.filter(
     (restaurant) => restaurant.owner_id === currentUser.id
   );
-
   useEffect(() => {
     setLoading(true);
     dispatch(fetchAllRestaurantsThunk())
@@ -33,16 +32,11 @@ function ManageRestaurants() {
     return <div>You must be logged in to manage restaurants.</div>;
 
   return (
-    <div className="manage-restaurants-page">
-      <div className="header">
-        <h1>Manage Your Restaurants</h1>
-        <p>
-          Click a restaurant&apos;s image to view its public listing, or use the
-          buttons below to update or delete the restaurant.
-        </p>
-      </div>
+    <div id="manage-restaurants-section">
+      <h2>Manage Your Restaurants</h2>
 
       <div className="create-restaurant-container">
+        <p>Use the buttons below to create, update, or delete a restaurant.</p>
         <button
           id="create-restaurant-button"
           onClick={() => {
@@ -53,30 +47,24 @@ function ManageRestaurants() {
         </button>
       </div>
 
-      <div className="restaurants-grid">
+      <div>
         {userRestaurants?.map((restaurant) => {
           // Calculate the average star rating for each restaurant
           const avgStarRating = restaurant?.reviewStats?.avgStarRating || 0;
           const reviewCount = restaurant?.reviewStats?.reviewCount || 0;
 
           return (
-            <div key={restaurant.id} className="restaurant-tile">
-              <Link
-                to={`/restaurants/${restaurant.id}`}
-                className="restaurant-link"
-              >
-                <div className="restaurant-image-container">
+            <>
+              <div key={restaurant.id} className="restaurant-item">
+                <div className="restaurant-image">
                   {restaurant?.previewImage ? (
-                    <img
-                      src={restaurant.previewImage}
-                      alt={restaurant.name}
-                      className="restaurant-image"
-                    />
+                    <img src={restaurant.previewImage} alt={restaurant.name} />
                   ) : (
                     <div>No Image Available</div>
                   )}
                 </div>
                 <div className="restaurant-details">
+                  <br />
                   <h3 className="restaurant-name">{restaurant.name}</h3>
                   <span className="rating-line">
                     {/* Pass the avgStarRating to the StarRating component */}
@@ -106,25 +94,26 @@ function ManageRestaurants() {
                     <span>{restaurant?.cuisine}</span>
                   </div>
                 </div>
-              </Link>
-              <span className="button-wrapper">
-                <button
-                  className="update-button"
-                  onClick={() => {
-                    navigate(`/restaurants/${restaurant.id}/edit`);
-                  }}
-                >
-                  Update
-                </button>
-                <OpenModalButton
-                  buttonText={"Delete"}
-                  modalComponent={
-                    <DeleteRestaurant restaurantId={restaurant.id} />
-                  }
-                  className="delete-button"
-                />
-              </span>
-            </div>
+
+                <span className="manage-buttons">
+                  <button
+                    className="update-button"
+                    onClick={() => {
+                      navigate(`/restaurants/${restaurant.id}/edit`);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <OpenModalButton
+                    buttonText={"Delete"}
+                    modalComponent={
+                      <DeleteRestaurant restaurantId={restaurant.id} />
+                    }
+                    className="delete-button"
+                  />
+                </span>
+              </div>
+            </>
           );
         })}
       </div>

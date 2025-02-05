@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
-import StarRating from "../StarRating";
-import { fetchAllRestaurantsThunk } from "../../redux/restaurants";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import eaterverse_banner from "../../../public/eaterverse_page-banner.png";
+import { fetchAllRestaurantsThunk } from "../../redux/restaurants";
+import StarRating from "../StarRating";
 import "./AllRestaurants.css";
 
 function AllRestaurants() {
@@ -55,7 +55,7 @@ function AllRestaurants() {
                         ) : (
                           <span>New</span>
                         )}
-                        <p style={{ fontWeight: "normal", color: "4c5b61" }}>
+                        <p style={{ fontWeight: "normal", color: "#4c5b61" }}>
                           ({reviewCount} Reviews)
                         </p>
                       </span>
