@@ -5,95 +5,95 @@ from sqlalchemy.sql import text
 def seed_restaurants():
     restaurant1 = Restaurant(
         owner_id=1,
-        address='123 Burger Lane',
-        city='New York',
-        state='NY',
-        country='USA',
-        phone_number='212-555-6789',
-        email='info@mainstcafe.com',
-        website='https://www.burgerhaven.com',
-        hours={
-            "Monday": ["9:00 AM", "9:00 PM"],
-            "Tuesday": ["9:00 AM", "9:00 PM"],
-            "Wednesday": ["9:00 AM", "9:00 PM"],
-            "Thursday": ["9:00 AM", "9:00 PM"],
-            "Friday": ["9:00 AM", "10:00 PM"],
-            "Saturday": ["10:00 AM", "10:00 PM"],
-            "Sunday": ["10:00 AM", "8:00 PM"]
-        },
-        name='Burger Haven',
-        cuisine='American',
-        price_point=2,
-        description='Juicy gourmet burgers and hand-cut fries.'
-    )
-    restaurant2 = Restaurant(
-        owner_id=2,
-        name='Chez Paris',
-        address='456 Rue de Paris',
-        city='San Francisco',
-        state='CA',
-        country='USA',
-        phone_number='415-555-1234',
-        email='bonjour@chezparis.com',
-        website='https://www.sf-chezparis.com',
-        hours={
-            "Monday": ["8:00 AM", "10:00 PM"],
-            "Tuesday": ["8:00 AM", "10:00 PM"],
-            "Wednesday": ["8:00 AM", "10:00 PM"],
-            "Thursday": ["8:00 AM", "11:00 PM"],
-            "Friday": ["8:00 AM", "12:00 AM"],
-            "Saturday": ["9:00 AM", "12:00 AM"],
-            "Sunday": ["9:00 AM", "9:00 PM"]
-        },
-        cuisine='French',
-        price_point=4,
-        description='Classic French dishes with a modern twist.'
-    )
-    restaurant3 = Restaurant(
-        owner_id=3,
-        name='Trattoria Italiana',
-        address='789 Pasta Place',
+        name='Au Cheval',
+        address='800 W Randolph St',
         city='Chicago',
         state='IL',
         country='USA',
-        phone_number='312-555-2468',
-        email='info@trattoriaitaliana.com',
-        website='https://www.trattoriaitaliana-chi.com',
+        phone_number='312-929-4580',
+        email='contact@auchevalchicago.com',
+        website='auchevaldiner.com/chicago',
         hours={
-            "Monday": ["11:00 AM", "9:00 PM"],
-            "Tuesday": ["11:00 AM", "9:00 PM"],
-            "Wednesday": ["11:00 AM", "9:00 PM"],
-            "Thursday": ["11:00 AM", "10:00 PM"],
-            "Friday": ["11:00 AM", "10:00 PM"],
-            "Saturday": ["12:00 PM", "10:00 PM"],
-            "Sunday": ["12:00 PM", "9:00 PM"]
+            "Monday": ["10:00 AM", "11:15 PM"],
+            "Tuesday": ["10:00 AM", "11:15 PM"],
+            "Wednesday": ["10:00 AM", "11:15 PM"],
+            "Thursday": ["10:00 AM", "11:15 PM"],
+            "Friday": ["10:00 AM", "11:15 PM"],
+            "Saturday": ["10:00 AM", "11:15 PM"],
+            "Sunday": ["10:00 AM", "10:15 PM"]
         },
-        cuisine='Italian',
+        cuisine='American',
         price_point=3,
-        description='Authentic Italian pasta and wood-fired pizzas.'
+        description='Savor elevated diner fare at legendary bars in, featuring reimagined classics and  the signature cheeseburger that&apos;s a fan favorite'
     )
-    restaurant4 = Restaurant(
+    restaurant2 = Restaurant(
         owner_id=2,
-        name='Sushi Station',
-        address='789 Sushi Street',
-        city='Los Angeles',
+        name="Tony's Pizza Napoletana",
+        address='1570 Stockton St',
+        city='San Francisco',
         state='CA',
         country='USA',
-        phone_number='213-555-9876',
-        email='hello@sushistation.com',
-        website='https://www.sushistation.co',
+        phone_number='415-835-9888',
+        email='info@tonyspizzanapoletana.com',
+        website='https://tonyspizzanapoletana.com/',
         hours={
-            "Monday": ["11:00 AM", "9:00 PM"],
-            "Tuesday": ["11:00 AM", "9:00 PM"],
-            "Wednesday": ["11:00 AM", "9:00 PM"],
-            "Thursday": ["11:00 AM", "10:00 PM"],
-            "Friday": ["11:00 AM", "10:00 PM"],
-            "Saturday": ["12:00 PM", "10:00 PM"],
-            "Sunday": ["12:00 PM", "9:00 PM"]
+            "Monday": ["12:00 PM", "9:30 PM"],
+            "Tuesday": ["12:00 PM", "9:30 PM"],
+            "Wednesday": ["12:00 PM", "10:00 PM"],
+            "Thursday": ["12:00 PM", "10:00 PM"],
+            "Friday": ["12:00 PM", "11:00 PM"],
+            "Saturday": ["12:00 PM", "11:00 PM"],
+            "Sunday": ["12:00 PM", "10:30 PM"]
         },
-        cuisine='Japanese',
-        price_point=3,
-        description='Fresh sushi and sashimi served daily.'
+        cuisine='Pizza',
+        price_point=2,
+        description='Bustling Italian eatery with varied pizza options from coal-fired to Roman-style, plus beer on tap.'
+    )
+    restaurant3 = Restaurant(
+        owner_id=3,
+        name='Best Bagel & Coffee',
+        address='225 W 35th St A,',
+        city='New York',
+        state='NY',
+        country='USA',
+        phone_number='212-564-4409',
+        email='bestbagel@gmail.com ',
+        website='bestbagelandcoffee.com',
+        hours={
+            "Monday": ["6:00 AM", "4:00 PM"],
+            "Tuesday": ["6:00 AM", "4:00 PM"],
+            "Wednesday": ["6:00 AM", "4:00 PM"],
+            "Thursday": ["6:00 AM", "4:00 PM"],
+            "Friday": ["6:00 AM", "4:00 PM"],
+            "Saturday": ["7:00 AM", "4:00 PM"],
+            "Sunday": ["7:00 AM", "4:00 PM"]
+        },
+        cuisine='Breakfast & Brunch',
+        price_point=1,
+        description='Unleash Your Inner Foodie with Our Delicious Bagels.'
+    )
+    restaurant4 = Restaurant(
+        owner_id=1,
+        name='The Eagle OTR',
+        address='1342 Vine St',
+        city='Cincinnati',
+        state='OH',
+        country='USA',
+        phone_number='513-802-5007',
+        email='',
+        website='https://www.eaglerestaurant.com/',
+        hours={
+            "Monday": ["11:00 AM", "11:00 PM"],
+            "Tuesday": ["11:00 AM", "11:00 PM"],
+            "Wednesday": ["11:00 AM", "11:00 PM"],
+            "Thursday": ["11:00 AM", "11:00 PM"],
+            "Friday": ["11:00 AM", "12:00 AM"],
+            "Saturday": ["11:00 AM", "12:00 AM"],
+            "Sunday": ["11:00 AM", "10:00 PM"]
+        },
+        cuisine='American',
+        price_point=2,
+        description='Convivial eatery & beer hall dishing up Southern classics such as fried chicken & spoonbread.'
     )
 
     db.session.add(restaurant1)

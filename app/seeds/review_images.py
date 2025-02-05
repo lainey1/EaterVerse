@@ -39,6 +39,6 @@ def undo_review_image():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.review_images RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM review_image"))
+        db.session.execute(text("DELETE FROM review_images"))
 
     db.session.commit()
