@@ -84,36 +84,3 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
-/* ================================
-     Image Tiles
-  ================================ */
-/* Restaurant Image Container */
-.restaurant-image-container {
-  display: block;
-  width: 100%;
-  height: 33vh;
-  border-radius: 0.5rem;
-  margin: 0 auto;
-  object-fit: cover;
-  object-position: center;
-  display: flex; /* Align placeholder content (optional) */
-  justify-content: center;
-  align-items: center;
-  color: #051923; /* text color for placeholder */
-}
-
-/* Restaurant Image */
-.restaurant-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* When there's no image, add a shaded background */
-.restaurant-image[alt=""] {
-  display: none; /* Hide the image element when alt is empty */
-}
