@@ -1,7 +1,7 @@
 #manage-reservations-section {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Add space between review items */
+  gap: 5px; /* Add space between review items */
 }
 
 .reservation-item {

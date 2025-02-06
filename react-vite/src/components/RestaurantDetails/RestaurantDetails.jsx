@@ -9,6 +9,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ReviewFormPage from "../ReviewFormPage/ReviewFormPage";
+
 import { IoIosInformationCircle, IoIosStarOutline } from "react-icons/io";
 import { MdAddAPhoto, MdClose } from "react-icons/md";
 import { fetchRestaurantThunk } from "../../redux/restaurants";
@@ -74,10 +77,6 @@ function RestaurantDetails() {
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedImage(null);
-  };
-
-  const handleWriteReviewClick = () => {
-    navigate(`/restaurants/${restaurantId}/review`);
   };
 
   const handleReserveClick = () => {
@@ -180,10 +179,17 @@ function RestaurantDetails() {
       <div id="restaurant-layout">
         <div id="restaurant-main-panel">
           <div id="restaurant-menu-buttons">
-            <button className="menu-button" onClick={handleWriteReviewClick}>
-              <IoIosStarOutline className="button-icon" />
-              Write a Review
-            </button>
+            <div className="button-wrapper">
+              <OpenModalButton
+                className="custom-open-modal-button" // Apply the custom styles to OpenModalButton
+                buttonText={
+                  <>
+                    <IoIosStarOutline className="button-icon" /> Write a Review
+                  </>
+                }
+                modalComponent={<ReviewFormPage restaurantId={restaurant.id} />}
+              />
+            </div>
 
             <button className="menu-button" onClick={handleNavigateToImages}>
               <MdAddAPhoto className="button-icon" />

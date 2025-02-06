@@ -151,6 +151,7 @@ def delete_review(review_id):
     Delete a review by ID
     """
     review = Review.query.get(review_id)
+    print(review)
     if not review:
         return jsonify({'message': 'Review not found'}), 404
 

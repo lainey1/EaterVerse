@@ -9,22 +9,27 @@ ECF2FD
 
 /* Center the review form on the page */
 .review-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 20px;
+  position: fixed;
+  top: 25%;
+  transform: translateX(-50%); /* Adjusts centering based on its own width */
+  width: 375px;
+  margin: 0; /* No margin, as it's fixed */
+  z-index: 1001; /* Ensure it's above the banner */
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(100, 100, 111, 0.2);
+  border-radius: 4px;
+  padding: 2rem;
 }
 
 /* Styling the review-body container */
 .review-body {
   width: 100%;
   max-width: 500px;
-  border: 1px solid #051923;
+  /* border: 1px solid #051923; */
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -35,6 +40,7 @@ form {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  padding: 25px;
 }
 
 /* Styling the review text area */

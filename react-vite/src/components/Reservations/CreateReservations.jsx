@@ -78,7 +78,7 @@ const CreateReservations = () => {
         setError(null);
 
         if (data.reservation) {
-          navigate(`/reservations/user`);
+          navigate(`/user/${currentUserId}?section=reservations`);
         }
       } catch (err) {
         setLoading(false);

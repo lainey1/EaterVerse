@@ -125,6 +125,24 @@
   background: #fff;
 }
 
+/* Wrap OpenModalButton inside a custom wrapper */
+.button-wrapper > * {
+  width: 200px; /* Control the width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 15px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-open-modal-button .button-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
 .menu-button {
   width: 200px;
   display: flex;
@@ -138,7 +156,7 @@
   cursor: pointer;
 }
 
-.menu-button .button-icon {
+.button-icon {
   font-size: 20px;
   margin-right: 8px;
 }
