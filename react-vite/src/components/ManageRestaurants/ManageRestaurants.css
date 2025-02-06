@@ -80,12 +80,43 @@
   .create-restaurant-container {
     gap: 0px;
   }
+
   .restaurant-item {
     display: flex;
     flex-direction: column;
     min-width: 360px;
   }
+
   .restaurant-image img {
     margin-top: 50px;
+  }
+
+  @media (max-width: 480px) {
+    .restaurant-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 360px;
+      align-items: center; /* Centers content */
+    }
+
+    .manage-buttons {
+      position: relative; /* Disables absolute positioning */
+      order: -1; /* Moves above image */
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2x2 button layout */
+      gap: 10px;
+      width: 100%; /* Ensure full width for proper alignment */
+      max-width: 275px; /* Match image width */
+      margin-bottom: 10px; /* Space between buttons and image */
+    }
+
+    .manage-buttons button {
+      width: 100%; /* Makes buttons fit grid cells */
+      text-align: center;
+    }
+
+    .restaurant-image img {
+      margin-top: 0; /* Removes previous margin */
+    }
   }
 }

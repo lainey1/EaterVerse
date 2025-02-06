@@ -225,18 +225,17 @@ function RestaurantDetails() {
             {/* <button className="menu-button" onClick={handleReserveClick}>
               Book a Table
             </button> */}
-            <OpenModalButton
-              className="custom-open-modal-button"
-              buttonText={
-                <>
-                  <IoIosStarOutline className="button-icon" />
-                  Book a Table
-                </>
-              }
-              modalComponent={
-                <CreateReservations restaurantId={restaurant.id} />
-              }
-            />
+
+            <div className="button-wrapper">
+              {" "}
+              <OpenModalButton
+                className="custom-open-modal-button"
+                buttonText="Book a Table"
+                modalComponent={
+                  <CreateReservations restaurantId={restaurant.id} />
+                }
+              />
+            </div>
           </div>
           <div className="restaurant-side-panel">
             <div className="restaurant-info">

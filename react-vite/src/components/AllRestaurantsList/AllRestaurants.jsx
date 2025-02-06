@@ -35,16 +35,18 @@ function AllRestaurants() {
                   to={`/restaurants/${restaurant.id}`}
                   className="restaurant-link"
                 >
-                  <div className="restaurant-image-container">
-                    {restaurant?.previewImage ? (
-                      <img
-                        src={restaurant.previewImage}
-                        alt={restaurant.name}
-                        className="restaurant-image"
-                      />
-                    ) : (
-                      <div>No Image Available</div>
-                    )}
+                  <div className="restaurant-tile-container">
+                    <div className="restaurant-image-container">
+                      {restaurant?.previewImage ? (
+                        <img
+                          src={restaurant.previewImage}
+                          alt={restaurant.name}
+                          className="all-restaurants-image"
+                        />
+                      ) : (
+                        <div>No Image Available</div>
+                      )}
+                    </div>
                     <div className="restaurant-details">
                       <h3 className="restaurant-name">{restaurant.name}</h3>
                       <span className="rating-line">

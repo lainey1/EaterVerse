@@ -196,6 +196,43 @@ const UpdateReservations = ({
       {message && <div className="success">{message}</div>}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="date-time-group">
+          <div className="form-group">
+            <label htmlFor="date">Date</label>
+            <div className="date-picker-wrapper">
+              <input
+                type="date"
+                id="date"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+                required
+                className="date-input"
+              />
+              <div className="selected-date">{displayDate}</div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="time">Time</label>
+            <select
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleInputChange}
+              className="time-input"
+            >
+              {timeSlots.map((time) => (
+                <option key={time} value={time}>
+                  {new Date(`2024-01-01T${time}`).toLocaleTimeString("en-US", {
+                    hour: "numeric",
+                    minute: "2-digit",
+                  })}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <div className="form-group">
           <label htmlFor="party_size">Party Size</label>
           <select
@@ -208,42 +245,6 @@ const UpdateReservations = ({
             {partySizeOptions.map((size) => (
               <option key={size} value={size}>
                 {size} {size === 1 ? "person" : "people"}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <div className="date-picker-wrapper">
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-              required
-              className="date-input"
-            />
-            <div className="selected-date">{displayDate}</div>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="time">Time</label>
-          <select
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleInputChange}
-            className="time-input"
-          >
-            {timeSlots.map((time) => (
-              <option key={time} value={time}>
-                {new Date(`2024-01-01T${time}`).toLocaleTimeString("en-US", {
-                  hour: "numeric",
-                  minute: "2-digit",
-                })}
               </option>
             ))}
           </select>
