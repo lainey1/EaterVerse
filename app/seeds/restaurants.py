@@ -96,10 +96,156 @@ def seed_restaurants():
         description='Convivial eatery & beer hall dishing up Southern classics such as fried chicken & spoonbread.'
     )
 
+    restaurant5 = Restaurant(
+        owner_id=2,
+        name='Nobu',
+        address='105 Hudson St',
+        city='New York',
+        state='NY',
+        country='USA',
+        phone_number='(212) 219-0500',
+        email='info@noburestaurants.com',
+        website='https://www.noburestaurants.com/',
+        hours={
+            "Monday": ["5:30 PM", "11:00 PM"],
+            "Tuesday": ["5:30 PM", "11:00 PM"],
+            "Wednesday": ["5:30 PM", "11:00 PM"],
+            "Thursday": ["5:30 PM", "11:00 PM"],
+            "Friday": ["5:30 PM", "11:30 PM"],
+            "Saturday": ["5:30 PM", "11:30 PM"],
+            "Sunday": ["5:30 PM", "11:00 PM"]
+        },
+        cuisine='Japanese',
+        price_point=5,
+        description='Upscale sushi and Japanese dishes in sleek, minimalist surroundings.'
+    )
+    restaurant6 = Restaurant(
+        owner_id=1,
+        name='The French Laundry',
+        address='6640 Washington St',
+        city='Yountville',
+        state='CA',
+        country='USA',
+        phone_number='(707) 944-2380',
+        email='info@frenchlaundry.com',
+        website='https://www.thomaskeller.com/the-french-laundry',
+        hours={
+            "Monday": ["5:00 PM", "10:00 PM"],
+            "Tuesday": ["5:00 PM", "10:00 PM"],
+            "Wednesday": ["5:00 PM", "10:00 PM"],
+            "Thursday": ["5:00 PM", "10:00 PM"],
+            "Friday": ["5:00 PM", "10:00 PM"],
+            "Saturday": ["5:00 PM", "10:00 PM"],
+            "Sunday": ["5:00 PM", "10:00 PM"]
+        },
+        cuisine='French',
+        price_point=5,
+        description='Thomas Keller’s acclaimed fine dining destination with a renowned tasting menu.'
+    )
+    restaurant7 = Restaurant(
+        owner_id=2,
+        name='Joe\'s Stone Crab',
+        address='11 Washington Ave',
+        city='Miami Beach',
+        state='FL',
+        country='USA',
+        phone_number='(305) 673-0365',
+        email='info@joesstonecrab.com',
+        website='https://www.joesstonecrab.com/',
+        hours={
+            "Monday": ["11:30 AM", "2:30 PM"],
+            "Tuesday": ["11:30 AM", "2:30 PM"],
+            "Wednesday": ["11:30 AM", "2:30 PM"],
+            "Thursday": ["11:30 AM", "2:30 PM"],
+            "Friday": ["11:30 AM", "2:30 PM"],
+            "Saturday": ["11:30 AM", "2:30 PM"],
+            "Sunday": ["11:30 AM", "2:30 PM"]
+        },
+        cuisine='Seafood',
+        price_point=4,
+        description='Old-school spot for fresh stone crab, seafood, and American fare in a relaxed setting.'
+    )
+    restaurant8 = Restaurant(
+        owner_id=3,
+        name='Eleven Madison Park',
+        address='11 Madison Ave',
+        city='New York',
+        state='NY',
+        country='USA',
+        phone_number='(212) 889-0905',
+        email='info@elevenmadisonpark.com',
+        website='https://www.elevenmadisonpark.com/',
+        hours={
+            "Monday": ["5:30 PM", "10:00 PM"],
+            "Tuesday": ["5:30 PM", "10:00 PM"],
+            "Wednesday": ["5:30 PM", "10:00 PM"],
+            "Thursday": ["5:30 PM", "10:00 PM"],
+            "Friday": ["5:30 PM", "10:00 PM"],
+            "Saturday": ["5:30 PM", "10:00 PM"],
+            "Sunday": ["5:30 PM", "10:00 PM"]
+        },
+        cuisine='Modern American',
+        price_point=5,
+        description='Refined seasonal American cuisine with a focus on innovation.'
+    )
+    restaurant9 = Restaurant(
+        owner_id=1,
+        name='Gordon Ramsay Hell\'s Kitchen',
+        address='1128 W 7th St',
+        city='Los Angeles',
+        state='CA',
+        country='USA',
+        phone_number='(213) 821-1051',
+        email='info@hellskitchenrestaurant.com',
+        website='https://www.hellskitchenrestaurant.com/',
+        hours={
+            "Monday": ["11:00 AM", "10:00 PM"],
+            "Tuesday": ["11:00 AM", "10:00 PM"],
+            "Wednesday": ["11:00 AM", "10:00 PM"],
+            "Thursday": ["11:00 AM", "10:00 PM"],
+            "Friday": ["11:00 AM", "10:00 PM"],
+            "Saturday": ["11:00 AM", "10:00 PM"],
+            "Sunday": ["11:00 AM", "10:00 PM"]
+        },
+        cuisine='Contemporary American',
+        price_point=4,
+        description='Gordon Ramsay’s celebrated restaurant featuring a signature “Hell’s Kitchen” experience.'
+    )
+    restaurant10 = Restaurant(
+        owner_id=2,
+        name='The Spotted Pig',
+        address='314 W 11th St',
+        city='New York',
+        state='NY',
+        country='USA',
+        phone_number='(212) 620-0393',
+        email='info@thespottedpig.com',
+        website='https://www.thespottedpig.com/',
+        hours={
+            "Monday": ["12:00 PM", "11:00 PM"],
+            "Tuesday": ["12:00 PM", "11:00 PM"],
+            "Wednesday": ["12:00 PM", "11:00 PM"],
+            "Thursday": ["12:00 PM", "11:00 PM"],
+            "Friday": ["12:00 PM", "11:00 PM"],
+            "Saturday": ["12:00 PM", "11:00 PM"],
+            "Sunday": ["12:00 PM", "11:00 PM"]
+        },
+        cuisine='Gastropub',
+        price_point=3,
+        description='Trendy gastropub serving inventive, upscale British & American comfort fare.'
+    )
+
     db.session.add(restaurant1)
     db.session.add(restaurant2)
     db.session.add(restaurant3)
     db.session.add(restaurant4)
+    db.session.add(restaurant5)
+    db.session.add(restaurant6)
+    db.session.add(restaurant7)
+    db.session.add(restaurant8)
+    db.session.add(restaurant9)
+    db.session.add(restaurant10)
+
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the restaurants table.
