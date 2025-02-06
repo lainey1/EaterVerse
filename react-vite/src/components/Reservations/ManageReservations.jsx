@@ -1,40 +1,64 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import UpdateReservations from "../Reservations/UpdateReservations";
 import "./ManageReservations.css";
 
 const ManageReservations = () => {
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState({ upcoming: [], past: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [upcomingPage, setUpcomingPage] = useState(1);
+  const [pastPage, setPastPage] = useState(1);
+  const resultsPerPage = 3;
 
-  // Fetch reservations on mount
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         const response = await fetch("/api/reservations/user", {
           method: "GET",
-          credentials: "include", // Include cookies for authentication (session-based login)
+          credentials: "include",
         });
         if (!response.ok) {
           throw new Error("Error fetching reservations");
         }
         const data = await response.json();
-        setReservations(data.reservations);
+
+        const now = new Date();
+        const sortedReservations = {
+          upcoming: [],
+          past: [],
+        };
+
+        data.reservations.forEach((reservation) => {
+          const reservationDate = new Date(reservation.date);
+          if (reservationDate >= now) {
+            sortedReservations.upcoming.push(reservation);
+          } else {
+            sortedReservations.past.push(reservation);
+          }
+        });
+
+        sortedReservations.upcoming.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        sortedReservations.past.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
+        setReservations(sortedReservations);
       } catch (err) {
         console.error("Error fetching reservations:", err);
         setError("There was an error fetching your reservations.");
       } finally {
-        setLoading(false); // Ensure loading is turned off
+        setLoading(false);
       }
     };
 
     fetchReservations();
   }, []);
 
-  // Handle reservation deletion
   const handleOnClick = async (reservationId) => {
-    setLoading(true); // Set loading true while deleting
+    setLoading(true);
     try {
       const response = await fetch(`/api/reservations/${reservationId}`, {
         method: "DELETE",
@@ -43,43 +67,39 @@ const ManageReservations = () => {
       if (!response.ok) {
         throw new Error("Error deleting reservation");
       }
-      // const data = await response.json();
-      // Remove deleted reservation from the list
-      setReservations((prevReservations) =>
-        prevReservations.filter(
-          (reservation) => reservation.id !== reservationId
-        )
-      );
+
+      setReservations((prev) => ({
+        upcoming: prev.upcoming.filter((res) => res.id !== reservationId),
+        past: prev.past.filter((res) => res.id !== reservationId),
+      }));
     } catch (err) {
       console.error("Error deleting reservation:", err);
       setError("There was an error deleting your reservation.");
     } finally {
-      setLoading(false); // Ensure loading is turned off
+      setLoading(false);
     }
   };
 
-  // Navigate to the reservation update page
-  const updatedOnClick = (reservationId) => {
-    navigate(`/reservations/${reservationId}/edit`); // Use backticks to correctly interpolate the reservation ID
+  const paginate = (reservations, page) => {
+    const start = (page - 1) * resultsPerPage;
+    return reservations.slice(start, start + resultsPerPage);
   };
 
-  if (loading) return <div>Loading reservations...</div>;
-  if (error) return <div>{error}</div>;
-
-  return (
-    <div id="manage-reservations-section">
-      <h2>Your Reservations</h2>
-      <div>
-        {reservations.length === 0 ? (
-          <p>No reservations found.</p>
+  const ReservationList = ({ reservations, title, page, setPage }) => {
+    const paginatedReservations = paginate(reservations, page);
+    return (
+      <div className="reservation-section">
+        <h3>{title}</h3>
+        {paginatedReservations.length === 0 ? (
+          <p>No {title.toLowerCase()} found.</p>
         ) : (
-          reservations.map((reservation) => (
+          paginatedReservations.map((reservation) => (
             <div key={reservation.id} className="reservation-item">
               <div className="restaurant-image">
                 {reservation.restaurant.preview_image ? (
                   <img
-                    src={reservation.restaurant?.preview_image}
-                    alt={reservation.restaurant?.name}
+                    src={reservation.restaurant.preview_image}
+                    alt={reservation.restaurant.name}
                   />
                 ) : (
                   <div>No Image Available</div>
@@ -100,22 +120,26 @@ const ManageReservations = () => {
                     timeZoneName: "short",
                   })}
                 </p>
-
                 <p>
                   <strong>Party Size: </strong>
                   {reservation.party_size}
                 </p>
               </div>
               <span className="manage-buttons">
-                <button
-                  onClick={() => updatedOnClick(reservation.id)}
-                  disabled={loading} // Disable button while loading
-                >
-                  {loading ? "Loading..." : "Update "}
-                </button>
+                <OpenModalButton
+                  className="custom-open-modal-button"
+                  buttonText="Update"
+                  modalComponent={
+                    <UpdateReservations
+                      reservation_id={reservation.id}
+                      restaurant_id={reservation.restaurant_id}
+                      restaurant_name={reservation.name}
+                    />
+                  }
+                />
                 <button
                   onClick={() => handleOnClick(reservation.id)}
-                  disabled={loading} // Disable button while loading
+                  disabled={loading}
                 >
                   {loading ? "Deleting..." : "Delete"}
                 </button>
@@ -123,7 +147,41 @@ const ManageReservations = () => {
             </div>
           ))
         )}
+        <div className="pagination">
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            Previous
+          </button>
+          <span> Page {page} </span>
+          <button
+            onClick={() => setPage(page + 1)}
+            disabled={page * resultsPerPage >= reservations.length}
+          >
+            Next
+          </button>
+        </div>
       </div>
+    );
+  };
+
+  if (loading) return <div>Loading reservations...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div id="manage-reservations-section">
+      <h2>Your Reservations</h2>
+      <ReservationList
+        reservations={reservations.upcoming}
+        title="Upcoming Reservations"
+        page={upcomingPage}
+        setPage={setUpcomingPage}
+      />
+      <div style={{ margin: "20px 0", borderTop: "1px solid #e0e0e0" }}></div>
+      <ReservationList
+        reservations={reservations.past}
+        title="Past Reservations"
+        page={pastPage}
+        setPage={setPastPage}
+      />
     </div>
   );
 };

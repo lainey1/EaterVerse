@@ -19,7 +19,6 @@ class User(db.Model, UserMixin):
     favorite_cuisine = db.Column(db.String(100), nullable=True)
     headline = db.Column(db.String(255), nullable=True)
 
-    review_images = db.relationship('ReviewImage', back_populates='user', cascade='all, delete-orphan')
     restaurant_images = db.relationship('RestaurantImage', back_populates='user', cascade='all, delete-orphan')
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
 

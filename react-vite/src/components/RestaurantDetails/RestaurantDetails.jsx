@@ -1,22 +1,32 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { IoIosStarOutline, IoIosInformationCircle } from "react-icons/io";
-import { MdAddAPhoto } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ReviewFormPage from "../ReviewFormPage/ReviewFormPage";
+import CreateReservations from "../Reservations/CreateReservations";
+
+import { IoIosInformationCircle, IoIosStarOutline } from "react-icons/io";
+import { MdAddAPhoto, MdClose } from "react-icons/md";
 import { fetchRestaurantThunk } from "../../redux/restaurants";
 import {
+  formatReviewCount,
+  formatStarRating,
   getAvgStarRating,
   getReviewCount,
-  formatStarRating,
-  formatReviewCount,
 } from "../../utils/restaurantHelpers";
-import { parseTimeToMinutes, formatTimeAgo } from "../../utils/timeHelpers";
-import RestaurantHours from "./RestaurantHours";
+import { formatTimeAgo, parseTimeToMinutes } from "../../utils/timeHelpers";
 import ReviewsRestaurant from "../ReviewsRestaurant";
 import StarRating from "../StarRating";
+import RestaurantHours from "./RestaurantHours";
+
 import "./RestaurantDetails.css";
 
 function RestaurantDetails() {
@@ -25,6 +35,8 @@ function RestaurantDetails() {
   const { restaurantId } = useParams();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const currentUser = useSelector((state) => state.session.user);
   const restaurant = useSelector(
@@ -58,13 +70,19 @@ function RestaurantDetails() {
     }
   }, [restaurant?.hours]);
 
-  const handleWriteReviewClick = () => {
-    navigate(`/restaurants/${restaurantId}/review`);
+  const handleImageClick = (index) => {
+    setSelectedImage(restaurant.images[index].url);
+    setModalOpen(true);
   };
 
-  const handleReserveClick = () => {
-    navigate(`/restaurant/${restaurantId}/new`);
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedImage(null);
   };
+
+  // const handleReserveClick = () => {
+  //   navigate(`/restaurant/${restaurantId}/new`);
+  // };
 
   const handleNavigateToImages = () => {
     navigate("images");
@@ -80,15 +98,47 @@ function RestaurantDetails() {
   return (
     <div className="restaurant-page">
       <div className="carousel-container">
-        <Carousel>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={10}
+          slidesPerView={1}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          navigation
+          pagination={{ clickable: true }}
+          loop={true} // Enables infinite scrolling
+        >
           {restaurant.images.map((image, idx) => (
-            <div key={idx}>
-              <img src={image.url} alt={`Restaurant image ${idx + 1}`} />
-              <p className="legend">{image.caption || `Image ${idx + 1}`}</p>
-            </div>
+            <SwiperSlide key={idx}>
+              <img
+                src={image.url}
+                alt={`Restaurant image ${idx + 1}`}
+                style={{
+                  maxHeight: "400px",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+                onClick={() => handleImageClick(idx)}
+              />
+            </SwiperSlide>
           ))}
-        </Carousel>
+        </Swiper>
       </div>
+      {/* Modal for single enlarged image*/}
+      {modalOpen && selectedImage && (
+        <div className="image-modal">
+          <div className="image-modal-overlay" onClick={handleCloseModal}></div>
+          <div className="image-modal-content">
+            <button className="image-modal-close" onClick={handleCloseModal}>
+              <MdClose size={30} />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Enlarged restaurant image"
+              className="modal-image"
+            />
+          </div>
+        </div>
+      )}
       <div className="restaurant-page-banner">
         <h2 className="restaurant-name">{restaurant?.name}</h2>
         <span>
@@ -127,55 +177,87 @@ function RestaurantDetails() {
           </div>
         </span>
       </div>
-
       <div id="restaurant-layout">
         <div id="restaurant-main-panel">
-          <div id="restaurant-menu">
-            <button className="menu-button" onClick={handleWriteReviewClick}>
-              <IoIosStarOutline className="button-icon" />
-              Write a Review
-            </button>
+          <div id="restaurant-menu-buttons">
+            <div className="button-wrapper">
+              <OpenModalButton
+                className="custom-open-modal-button" // Apply the custom styles to OpenModalButton
+                buttonText={
+                  <>
+                    <IoIosStarOutline className="button-icon" /> Write a Review
+                  </>
+                }
+                modalComponent={<ReviewFormPage restaurantId={restaurant.id} />}
+              />
+            </div>
 
             <button className="menu-button" onClick={handleNavigateToImages}>
               <MdAddAPhoto className="button-icon" />
               Add Photo
             </button>
-          </div>
-          <div className="sub-panel">
-            <h2>Location & Hours</h2>
-            <p>
-              {restaurant.address}, {restaurant.city}, {restaurant.state},{" "}
-              {restaurant.country}
-            </p>
-            <RestaurantHours hours={restaurant?.hours} />
-          </div>
-          <div className="sub-panel">
-            <ReviewsRestaurant />
-          </div>
-        </div>
-        <div id="restaurant-side-panel">
-          <h3>Make a Reservation</h3>
-          <button onClick={handleReserveClick}>Book a Table</button>
-          <div className="restaurant-info">
-            <div className="profile-text">
-              <a
-                href={restaurant.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit Website
-              </a>
-              <p>{restaurant.phone_number}</p>
-              <p>
-                {restaurant.address}, {restaurant.city}, {restaurant.state},{" "}
-                {restaurant.country}
-              </p>
-            </div>
+
             {isOwner && (
-              <button onClick={() => navigateToSection("restaurants")}>
+              <button
+                className="menu-button"
+                onClick={() => navigateToSection("restaurants")}
+              >
                 Manage Restaurant
               </button>
             )}
+          </div>
+          <div className="sub-panel">
+            <h3>Location & Hours</h3>
+            <p>
+              {restaurant.address}
+              <br />
+              {restaurant.city}, {restaurant.state}
+            </p>
+            <RestaurantHours hours={restaurant?.hours} />
+          </div>
+          <div>
+            <ReviewsRestaurant />
+          </div>
+        </div>
+        <div>
+          <div className="restaurant-side-panel">
+            <h3>Make a Reservation</h3>
+            {/* <button className="menu-button" onClick={handleReserveClick}>
+              Book a Table
+            </button> */}
+
+            <div className="button-wrapper">
+              {" "}
+              <OpenModalButton
+                className="custom-open-modal-button"
+                buttonText="Book a Table"
+                modalComponent={
+                  <CreateReservations restaurantId={restaurant.id} />
+                }
+              />
+            </div>
+          </div>
+          <div className="restaurant-side-panel">
+            <div className="restaurant-info">
+              <div className="profile-text">
+                <a
+                  href={restaurant.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {restaurant.website}
+                </a>
+                <hr />
+                <p>{restaurant.phone_number}</p>
+                <hr />
+                <p>
+                  {restaurant.address}
+                  <br />
+                  {restaurant.city}, {restaurant.state}
+                </p>
+                <hr />
+              </div>
+            </div>
           </div>
         </div>
       </div>

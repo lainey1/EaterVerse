@@ -1,27 +1,25 @@
-.reviews-list {
-    list-style-type: none;
-}
-
-.review-item {
-    border: 3px solid #051923;
-    border-radius: 20px;
-    padding: 10px;
-    margin-bottom: 10px;
+.restaurant-review {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
 .review-username {
-    font-weight: bold;
-    font-size: 20px;
-    color: #051923;
+  font-weight: bold;
+  font-size: 20px;
+  color: #051923;
 }
 
 .review-text {
-    font-size: 16px;
-    margin: 10px 0;
-    color: #051923;
+  font-size: 16px;
+  margin: 10px 0;
+  color: #051923;
 }
 
 .review-time {
-    font-size: 10px;
-    color: #666;
+  font-size: 10px;
+  color: #666;
 }

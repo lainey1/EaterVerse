@@ -2,33 +2,102 @@
   display: flex;
   flex-direction: column;
   max-width: 1100px;
-  margin: 0 auto; /* Centers the container */
+  margin: 0 auto;
   padding: 0 15px;
+}
+
+/* Change arrow color */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #e26d12 !important; /* Change to desired color */
+  background-color: #fff;
+  border-radius: 24px;
+}
+
+/* Adjust arrow size (optional) */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px !important; /* Adjust size */
+}
+
+/* Change inactive and active dot colors to be the same */
+.swiper-pagination-bullet {
+  background-color: #4c5b61 !important; /* Set to desired color */
+  opacity: 1; /* Ensure visibility */
+}
+
+/* Prevent active dot from changing */
+.swiper-pagination-bullet-active {
+  background-color: #e26d12 !important; /* Same color as inactive dots */
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.image-modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.image-modal-content {
+  position: relative;
+  width: 90vw; /* Ensures a consistent width */
+  max-width: 800px; /* Prevents it from being too large */
+  height: 80vh; /* Ensures consistent height */
+  max-height: 600px; /* Prevents excessive height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures all images maintain aspect ratio while covering the box */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 #restaurant-layout {
   display: flex;
   align-items: flex-start;
   margin-top: 25px;
-}
-
-.carousel-container {
-  max-width: 600px;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background: #8c183e;
-}
-
-.carousel-container .carousel img {
-  max-height: 300px;
-  object-fit: cover;
-  width: 100%;
-}
-
-.carousel .legend {
-  font-size: 0.9em; /* Adjust the caption size */
 }
 
 .highlights {
@@ -45,15 +114,33 @@
   margin-right: 25px;
 }
 
-#restaurant-menu {
+#restaurant-menu-buttons {
   display: flex;
   flex-wrap: wrap; /* Allows buttons to wrap if needed */
-  gap: 15px; /* Space between buttons */
+  gap: 15px;
   margin-bottom: 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background: #fff;
+}
+
+/* Wrap OpenModalButton inside a custom wrapper */
+.button-wrapper > * {
+  width: 200px; /* Control the width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 15px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-open-modal-button .button-icon {
+  font-size: 20px;
+  margin-right: 8px;
 }
 
 .menu-button {
@@ -69,7 +156,7 @@
   cursor: pointer;
 }
 
-.menu-button .button-icon {
+.button-icon {
   font-size: 20px;
   margin-right: 8px;
 }
@@ -104,14 +191,15 @@
   text-align: left;
 }
 
-#restaurant-side-panel {
+.restaurant-side-panel {
   flex: 1; /* Side panel takes up less space compared to the main panel */
   position: sticky; /* Keeps it fixed when scrolling */
   top: 15px; /* Adds space from the top */
-  align-self: flex-start; /* Ensures it aligns with the top of the main panel */
+  align-self: flex-start;
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background: #fff;
 }
@@ -136,7 +224,7 @@
     margin: 0;
   }
 
-  #restaurant-side-panel {
+  .restaurant-side-panel {
     width: 90%;
   }
 }

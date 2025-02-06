@@ -87,18 +87,25 @@ def create_reservation(restaurant_id):
         'errors': form.errors
     }), 400
 
-# Update a reservation
 @reservation_routes.route('/<int:reservation_id>', methods=['GET','PUT'])
 @login_required
 def update_reservation(reservation_id):
     """
-    Update a reservation by ID
+    Get or update a reservation by ID
     """
     reservation = Reservation.query.get(reservation_id)
     if not reservation:
         return jsonify({'message': 'Reservation not found'}), 404
 
-    # Ensure the user is the one who created the reservation or is not the owner of the restaurant
+    # For GET requests, return the reservation if user has permission
+    if request.method == 'GET':
+        # Check if user has permission to view this reservation
+        if reservation.user_id != current_user.id and reservation.restaurant.owner_id != current_user.id:
+            return jsonify({'message': 'You are not authorized to view this reservation'}), 403
+        return jsonify(reservation.to_dict()), 200
+
+    # Handle PUT requests
+    # Ensure the user is the one who created the reservation or is the owner of the restaurant
     if reservation.user_id != current_user.id and reservation.restaurant.owner_id != current_user.id:
         return jsonify({'message': 'You are not authorized to update this reservation'}), 403
 

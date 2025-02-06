@@ -8,6 +8,7 @@ function ProfileOverview({ user }) {
         <h3 style={{ color: "#8c183e", fontSize: "2em" }}>
           Welcome, {user.username}!
         </h3>
+        <hr />
 
         <div className="overview-details">
           {/* Favorite Cuisine */}

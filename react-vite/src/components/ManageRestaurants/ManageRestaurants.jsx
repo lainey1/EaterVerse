@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { IoLocationOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchAllRestaurantsThunk } from "../../redux/restaurants";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteRestaurant from "./DeleteRestaurant";
-import { fetchAllRestaurantsThunk } from "../../redux/restaurants";
-import { IoLocationOutline } from "react-icons/io5";
 
 import StarRating from "../StarRating";
 import "./ManageRestaurants.css";
@@ -96,6 +96,21 @@ function ManageRestaurants() {
                 </div>
 
                 <span className="manage-buttons">
+                  <button
+                    onClick={() =>
+                      navigate(`/restaurants/${restaurant.id}/images`)
+                    }
+                  >
+                    Photos
+                  </button>
+                  <button
+                    className="update-button"
+                    onClick={() => {
+                      navigate(`/restaurants/${restaurant.id}/`);
+                    }}
+                  >
+                    View
+                  </button>
                   <button
                     className="update-button"
                     onClick={() => {

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as reviewActions from "../../redux/review";
 import { FaStar } from "react-icons/fa6";
+import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
+import { fetchRestaurantThunk } from "../../redux/restaurants";
 
 function ReviewFormPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { closeModal } = useModal();
   const restaurantId = parseInt(useParams().restaurantId);
   const currentUser = useSelector((state) => state.session.user);
 
@@ -64,19 +67,22 @@ function ReviewFormPage() {
     // console.log("validationErrors: ", validationErrors);
     // console.log("newReview: ", newReview);
 
-    return dispatch(
-      reviewActions.createNewReview(newReview, restaurantId),
-      navigate(`/restaurants/${restaurantId}`)
-    ).catch(async (res) => {
-      if (res.json) {
-        const data = await res.json();
-        if (data?.errors) {
-          setErrors(data.errors);
+    return dispatch(reviewActions.createNewReview(newReview, restaurantId))
+      .then(() => dispatch(fetchRestaurantThunk(restaurantId)))
+      .then(() => {
+        window.location.reload();
+        closeModal();
+      })
+      .catch(async (res) => {
+        if (res.json) {
+          const data = await res.json();
+          if (data?.errors) {
+            setErrors(data.errors);
+          }
+        } else {
+          setErrors({ Error: "An unexpected error occurred" });
         }
-      } else {
-        setErrors({ Error: "An unexpected error occured" });
-      }
-    });
+      });
   };
 
   return (
