@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import UpdateReservations from "../Reservations/UpdateReservations";
 import "./ManageReservations.css";
 
 const ManageReservations = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   // Fetch reservations on mount
   useEffect(() => {
@@ -58,11 +58,6 @@ const ManageReservations = () => {
     }
   };
 
-  // Navigate to the reservation update page
-  const updatedOnClick = (reservationId) => {
-    navigate(`/reservations/${reservationId}/edit`); // Use backticks to correctly interpolate the reservation ID
-  };
-
   if (loading) return <div>Loading reservations...</div>;
   if (error) return <div>{error}</div>;
 
@@ -107,12 +102,17 @@ const ManageReservations = () => {
                 </p>
               </div>
               <span className="manage-buttons">
-                <button
-                  onClick={() => updatedOnClick(reservation.id)}
-                  disabled={loading} // Disable button while loading
-                >
-                  {loading ? "Loading..." : "Update "}
-                </button>
+                <OpenModalButton
+                  className="custom-open-modal-button"
+                  buttonText="Update"
+                  modalComponent={
+                    <UpdateReservations
+                      reservation_id={reservation.id}
+                      restaurant_id={reservation.restaurant_id}
+                      restaurant_name={reservation.name}
+                    />
+                  }
+                />
                 <button
                   onClick={() => handleOnClick(reservation.id)}
                   disabled={loading} // Disable button while loading

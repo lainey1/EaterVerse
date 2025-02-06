@@ -2,132 +2,217 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import "./ReservationForm.css";
 
 const CreateReservations = () => {
-  const { restaurantId } = useParams(); // Get the restaurantId from the URL
+  const { restaurantId } = useParams();
   const { closeModal } = useModal();
-  const [date, setDate] = useState("");
-  const [partySize, setPartySize] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-
   const navigate = useNavigate();
-  const users = useSelector((store) => store.session.user);
+  const user = useSelector((store) => store.session.user);
 
-  const currentUserId = users?.id; // safely accessing user ID
-  console.log("User", currentUserId, restaurantId);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    date: "",
+    time: "19:00", // Default to 7:00 PM
+    party_size: 2, // Default to 2 people
+  });
 
-  const handleSubmit = (e) => {
+  const [displayDate, setDisplayDate] = useState("");
+
+  // Generate time slots in 15-minute increments
+  const generateTimeSlots = () => {
+    const slots = [];
+    for (let hour = 11; hour < 23; hour++) {
+      // 11 AM to 10 PM
+      for (let minute = 0; minute < 60; minute += 15) {
+        const timeString = `${hour.toString().padStart(2, "0")}:${minute
+          .toString()
+          .padStart(2, "0")}`;
+        slots.push(timeString);
+      }
+    }
+    return slots;
+  };
+
+  const timeSlots = generateTimeSlots();
+
+  // Party size options
+  const partySizeOptions = Array.from({ length: 12 }, (_, i) => i + 1);
+
+  // Format date for display
+  const formatDisplayDate = (dateString) => {
+    try {
+      if (!dateString) return "";
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return "";
+      return date.toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      });
+    } catch (err) {
+      console.error("Date formatting error:", err);
+      return "";
+    }
+  };
+
+  const validateField = (name, value) => {
+    if (name === "date") {
+      const selectedDate = new Date(value);
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      if (selectedDate <= currentDate) {
+        return "Date must be after today.";
+      }
+    }
+    return null;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "date") {
+      setDisplayDate(formatDisplayDate(value));
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    const validationError = validateField(name, value);
+    setError(validationError);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
+    if (error) {
+      return;
+    }
 
     if (!restaurantId) {
       setError("Invalid restaurant ID");
-      setLoading(false);
       return;
     }
 
-    if (!currentUserId) {
-      setError("User is not logged in");
-      setLoading(false);
+    if (!user?.id) {
+      setError("Please log in to make a reservation");
       return;
     }
+
+    setLoading(true);
+    setMessage("");
+
+    // Combine date and time for submission
+    const dateTime = `${formData.date}T${formData.time}:00`;
 
     const reservationData = {
       restaurant_id: parseInt(restaurantId),
-      user_id: currentUserId,
-      date: date + ":00",
-      party_size: parseInt(partySize),
+      user_id: user.id,
+      date: dateTime,
+      party_size: parseInt(formData.party_size),
     };
-    // console.log("REVDATA", reservationData);
 
-    const fetchCreate = async () => {
-      try {
-        const response = await fetch(
-          `/api/reservations/restaurant/${restaurantId}/new`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            },
-            body: JSON.stringify(reservationData),
-          }
-        );
-
-        // Read the response body once
-        const responseBody = await response.json();
-
-        // Log response status and body for debugging
-        console.log("Response Status:", response.status);
-        console.log("Response Body:", responseBody);
-
-        // Check for non-OK responses
-        if (!response.ok) {
-          throw new Error(
-            responseBody.message || "Failed to create reservation"
-          );
+    try {
+      const response = await fetch(
+        `/api/reservations/restaurant/${restaurantId}/new`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: JSON.stringify(reservationData),
         }
+      );
 
-        // Use the already parsed response body for your success handling
-        const data = responseBody;
-        console.log("Reservation Data:", data);
+      const data = await response.json();
 
-        // Handle success
-        setLoading(false);
-        setSuccess(data.message);
-        setError(null);
-
-        if (data.reservation) {
-          navigate(`/user/${currentUserId}?section=reservations`);
-          closeModal();
-        }
-      } catch (err) {
-        setLoading(false);
-        setSuccess(null);
-        setError(
-          `There was an error creating your reservation: ${err.message}`
-        );
-        console.error("Error:", err);
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to create reservation");
       }
-    };
 
-    fetchCreate();
+      setMessage(data.message || "Reservation created successfully");
+      navigate(`/user/${user.id}?section=reservations`);
+      closeModal();
+    } catch (err) {
+      setError(
+        err.message || "An error occurred while creating the reservation"
+      );
+      console.error("Error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      <h1>Create Reservation</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="date">Date and Time</label>
-          <input
-            type="datetime-local"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-        <div>
+    <div className="reservation-form">
+      <h2>Make a Reservation</h2>
+
+      {error && <div className="error">{error}</div>}
+      {message && <div className="success">{message}</div>}
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="form-group">
           <label htmlFor="party_size">Party Size</label>
-          <input
-            type="number"
+          <select
             id="party_size"
-            min="1"
-            value={partySize}
-            onChange={(e) => setPartySize(e.target.value)}
-            required
-          />
+            name="party_size"
+            value={formData.party_size}
+            onChange={handleInputChange}
+            className="select-input"
+          >
+            {partySizeOptions.map((size) => (
+              <option key={size} value={size}>
+                {size} {size === 1 ? "person" : "people"}
+              </option>
+            ))}
+          </select>
         </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating Reservation..." : "Create Reservation"}
+
+        <div className="form-group">
+          <label htmlFor="date">Date</label>
+          <div className="date-picker-wrapper">
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              required
+              className="date-input"
+            />
+            <div className="selected-date">{displayDate}</div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="time">Time</label>
+          <select
+            id="time"
+            name="time"
+            value={formData.time}
+            onChange={handleInputChange}
+            className="time-input"
+          >
+            {timeSlots.map((time) => (
+              <option key={time} value={time}>
+                {new Date(`2024-01-01T${time}`).toLocaleTimeString("en-US", {
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button type="submit" disabled={loading} className="submit-button">
+          {loading ? "Creating..." : "Complete Reservation"}
         </button>
       </form>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
     </div>
   );
 };

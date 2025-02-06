@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import restaurantsReducer from "./restaurants";
 import reviewsReducer from "./review";
 import restaurantImagesReducer from "./restaurantImages";
+import reservationsReducer from "./reservations";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   restaurants: restaurantsReducer,
   reviews: reviewsReducer,
   restaurantImages: restaurantImagesReducer,
+  reservations: reservationsReducer,
 });
 
 let enhancer;

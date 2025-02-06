@@ -1,0 +1,94 @@
+.reservation-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2b273c;
+}
+
+.date-time-group {
+  display: flex;
+  gap: 10px;
+}
+
+.select-input,
+.date-input,
+.time-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.date-picker-wrapper {
+  position: relative;
+}
+
+.date-input {
+  width: 100%;
+}
+
+.selected-date {
+  position: absolute;
+  /* top: 50%; */
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Hide the default date picker text but keep the functionality */
+/* input[type="date"]::-webkit-datetime-edit {
+  color: transparent;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit {
+  color: #2b273c;
+} */
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #d32323;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #e33333;
+}
+
+.error {
+  color: #d32323;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #ffd1d1;
+}
+
+.success {
+  color: #28a745;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #d4edda;
+}
