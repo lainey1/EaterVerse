@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 
 const CreateReservations = () => {
   const { restaurantId } = useParams(); // Get the restaurantId from the URL
+  const { closeModal } = useModal();
   const [date, setDate] = useState("");
   const [partySize, setPartySize] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -79,6 +81,7 @@ const CreateReservations = () => {
 
         if (data.reservation) {
           navigate(`/user/${currentUserId}?section=reservations`);
+          closeModal();
         }
       } catch (err) {
         setLoading(false);

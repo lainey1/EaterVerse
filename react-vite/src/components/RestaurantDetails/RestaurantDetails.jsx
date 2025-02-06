@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ReviewFormPage from "../ReviewFormPage/ReviewFormPage";
+import CreateReservations from "../Reservations/CreateReservations";
 
 import { IoIosInformationCircle, IoIosStarOutline } from "react-icons/io";
 import { MdAddAPhoto, MdClose } from "react-icons/md";
@@ -79,9 +80,9 @@ function RestaurantDetails() {
     setSelectedImage(null);
   };
 
-  const handleReserveClick = () => {
-    navigate(`/restaurant/${restaurantId}/new`);
-  };
+  // const handleReserveClick = () => {
+  //   navigate(`/restaurant/${restaurantId}/new`);
+  // };
 
   const handleNavigateToImages = () => {
     navigate("images");
@@ -221,9 +222,21 @@ function RestaurantDetails() {
         <div>
           <div className="restaurant-side-panel">
             <h3>Make a Reservation</h3>
-            <button className="menu-button" onClick={handleReserveClick}>
+            {/* <button className="menu-button" onClick={handleReserveClick}>
               Book a Table
-            </button>
+            </button> */}
+            <OpenModalButton
+              className="custom-open-modal-button"
+              buttonText={
+                <>
+                  <IoIosStarOutline className="button-icon" />
+                  Book a Table
+                </>
+              }
+              modalComponent={
+                <CreateReservations restaurantId={restaurant.id} />
+              }
+            />
           </div>
           <div className="restaurant-side-panel">
             <div className="restaurant-info">
