@@ -1,15 +1,36 @@
 # Define common time range for the dropdowns
-TIME_CHOICES = [
-    ('Closed', 'Closed'),
-    ('12:00 AM', '12:00 AM'), ('1:00 AM', '1:00 AM'), ('2:00 AM', '2:00 AM'),
-    ('3:00 AM', '3:00 AM'), ('4:00 AM', '4:00 AM'), ('5:00 AM', '5:00 AM'),
-    ('6:00 AM', '6:00 AM'), ('7:00 AM', '7:00 AM'), ('8:00 AM', '8:00 AM'),
-    ('9:00 AM', '9:00 AM'), ('10:00 AM', '10:00 AM'), ('11:00 AM', '11:00 AM'),
-    ('12:00 PM', '12:00 PM'), ('1:00 PM', '1:00 PM'), ('2:00 PM', '2:00 PM'),
-    ('3:00 PM', '3:00 PM'), ('4:00 PM', '4:00 PM'), ('5:00 PM', '5:00 PM'),
-    ('6:00 PM', '6:00 PM'), ('7:00 PM', '7:00 PM'), ('8:00 PM', '8:00 PM'),
-    ('9:00 PM', '9:00 PM'), ('10:00 PM', '10:00 PM'), ('11:00 PM', '11:00 PM')
-]
+def generate_time_choices():
+    times = [('Closed', 'Closed')]
+    periods = ['AM', 'PM']
+
+    for period in periods:
+        for hour in range(1, 13):  # 1-12
+            for minute in ['00', '15', '30', '45']:
+                time_str = f'{hour}:{minute} {period}'
+                times.append((time_str, time_str))
+
+    # Sort times in chronological order
+    def time_sort_key(time_tuple):
+        if time_tuple[0] == 'Closed':
+            return -1  # Put 'Closed' first
+
+        time_str = time_tuple[0]
+        hour, rest = time_str.split(':')
+        minute, period = rest.split()
+        hour = int(hour)
+
+        # Convert to 24 hour format for sorting
+        if period == 'PM' and hour != 12:
+            hour += 12
+        elif period == 'AM' and hour == 12:
+            hour = 0
+
+        return hour * 60 + int(minute)
+
+    sorted_times = sorted(times[1:], key=time_sort_key)  # Sort all except 'Closed'
+    return [times[0]] + sorted_times  # Put 'Closed' back at the start
+
+TIME_CHOICES = generate_time_choices()
 
 POPULAR_CUISINES = [
     ('American'),

@@ -36,10 +36,9 @@ function EditProfile() {
       headline: formData.headline,
     };
 
-    console.log("DEBUG THUNK");
-    const res = await dispatch(thunkUpdateProfile(userId, updatedProfile));
-
-    console.log("RES====", res);
+    await dispatch(thunkUpdateProfile(userId, updatedProfile));
+    // const res = await dispatch(thunkUpdateProfile(userId, updatedProfile));
+    // console.log("RES====", res);
 
     navigate(`/user/${userId}`);
   };

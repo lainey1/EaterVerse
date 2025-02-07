@@ -1,9 +1,14 @@
+from datetime import datetime
+
+import pytz
 from flask import Blueprint, jsonify, request
+from flask_login import current_user, login_required
 from sqlalchemy import func
+
 from app.forms import RestaurantForm
-from app.models import Restaurant, Review, RestaurantImage,db
-from flask_login import login_required, current_user
-from ..constants import TIME_CHOICES, POPULAR_CUISINES
+from app.models import Restaurant, RestaurantImage, Review, db
+
+from ..constants import POPULAR_CUISINES, TIME_CHOICES
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -26,12 +31,20 @@ def get_form_schema():
     return jsonify(form_to_json(form))
 
 
-@restaurant_routes.route('/constants', methods=['GET'])
+
+@restaurant_routes.route('/constants')
 def get_constants():
-    return jsonify({
+    # Get timezone choices from pytz
+    timezone_choices = [(tz, tz.replace('_', ' '))
+                       for tz in pytz.common_timezones_set
+                       if 'America' in tz or 'US' in tz or 'Pacific' in tz]
+    timezone_choices.sort()  # Sort alphabetically
+
+    return {
         'time_choices': TIME_CHOICES,
-        'popular_cuisines': POPULAR_CUISINES
-    })
+        'popular_cuisines': POPULAR_CUISINES,
+        'timezone_choices': timezone_choices
+    }
 
 @restaurant_routes.route('/')
 def restaurants():
@@ -219,6 +232,7 @@ def create_restaurant():
                     cuisine=form.cuisine.data,
                     price_point=int(form.price_point.data),
                     description=form.description.data,
+                    timezone=form.timezone,
                     hours={
                         "Monday": [form.monday_open.data, form.monday_close.data],
                         "Tuesday": [form.tuesday_open.data, form.tuesday_close.data],
@@ -260,7 +274,7 @@ def update_restaurant(restaurant_id):
 
     # Get data from the request
     data = request.get_json()
-    print(data)
+    # print(data)
 
     # Validate required fields
     required_fields = ['name', 'address', 'city', 'state', 'country', 'hours']
@@ -280,6 +294,7 @@ def update_restaurant(restaurant_id):
     restaurant.cuisine = data.get('cuisine')
     restaurant.price_point = data.get('price_point')
     restaurant.description = data.get('description')
+    restaurant.timezone = data.get('timezone')
     restaurant.hours = data['hours']
 
     # Save changes to the database

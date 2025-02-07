@@ -219,6 +219,30 @@ def seed_restaurant_image():
             url='https://cdn.vox-cdn.com/thumbor/RXRPEDVJN-LCKX6RlPwpbBunMyw=/0x0:1000x668/3070x1727/filters:focal(420x254:580x414):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/51782969/20140623-001-Spotted_20Pig.0__1_.0.0.jpg',
             is_preview=False
         ),
+        RestaurantImage(
+            restaurant_id=11,
+            user_id=3,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/0cFe9oAoFcuiHJTnTf7pGA/o.jpg',
+            is_preview=True
+        ),
+         RestaurantImage(
+            restaurant_id=11,
+            user_id=2,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/P8ST_4HgXeperbTouYviVg/o.jpg',
+            is_preview=False
+        ),
+        RestaurantImage(
+            restaurant_id=12,
+            user_id=2,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/UCmKZurK8KLd7izGjD4yvA/o.jpg',
+            is_preview=True
+        ),
+         RestaurantImage(
+            restaurant_id=12,
+            user_id=1,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/fDg5U_kDgeQ4CNIiTemkLg/o.jpg',
+            is_preview=False
+        ),
     ]
 
 

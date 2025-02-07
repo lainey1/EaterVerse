@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateField } from "../../utils/validateField";
 import "./RestaurantForm.css";
@@ -60,7 +60,7 @@ function CreateRestaurant() {
     // You can now include the csrfToken in the request headers or form data
 
     // Log form data before submitting
-    console.log("Submitting form data: ", formData);
+    // console.log("Submitting form data: ", formData);
 
     // Transform the hours data into the expected format
     const transformedData = { ...formData };
@@ -93,7 +93,7 @@ function CreateRestaurant() {
     transformedData["hours"] = hours;
 
     // Log the transformed data
-    console.log("Transformed form data: ", transformedData);
+    // console.log("Transformed form data: ", transformedData);
 
     // Send the transformed formData to the backend
     fetch("/api/restaurants/new", {
@@ -108,13 +108,13 @@ function CreateRestaurant() {
         if (data.error) {
           setError(data.error);
         } else {
-          console.log("Restaurant created:", data);
+          // console.log("Restaurant created:", data);
           navigate(`/restaurants/${data.id}`);
         }
       })
       .catch((err) => {
-        console.error("Error during form submission:", err);
-        setError("Error submitting form");
+        // console.error("Error during form submission:", err);
+        setError("Error submitting form", err);
       });
   };
 
@@ -228,6 +228,26 @@ function CreateRestaurant() {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Timezone Field */}
+      <div className="form-group">
+        <label className="form-label">{formSchema["timezone"]?.label}</label>
+        <select
+          className="form-input"
+          name="timezone"
+          value={formData["timezone"]}
+          onChange={handleChange}
+        >
+          {formSchema["timezone"]?.choices.map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        {error["timezone"] && (
+          <span className="error-message">{error["timezone"]}</span>
+        )}
       </div>
 
       {/* Operating Hours Section */}
