@@ -1,11 +1,11 @@
 /* RestaurantForm.css */
 .restaurant-form {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 25px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 
 .form-title {

@@ -502,31 +502,30 @@ const UpdateRestaurant = () => {
           </div>
         </section>
 
-        {/* Restaurant Timezone */}
-        <div className="form-group">
-          <label className="form-label">Timezone</label>
-          <select
-            className="form-input"
-            name="timezone"
-            value={formData.timezone}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="" disabled>
-              Select Timezone
-            </option>
-            {constants.timezone_choices.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-          {errors.timezone && <p className="form-error">{errors.timezone}</p>}
-        </div>
-
         {/* Restaurant Hours */}
         <section className="form-section">
           <h2>Set your restaurant&apos;s hours</h2>
+          {/* Restaurant Timezone */}
+          <div className="form-group">
+            <label className="form-label">Timezone</label>
+            <select
+              className="form-input"
+              name="timezone"
+              value={formData.timezone}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="" disabled>
+                Select Timezone
+              </option>
+              {constants.timezone_choices.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            {errors.timezone && <p className="form-error">{errors.timezone}</p>}
+          </div>
           {renderHours()}
         </section>
 

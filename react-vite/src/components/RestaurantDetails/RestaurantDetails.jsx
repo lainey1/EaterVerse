@@ -113,10 +113,6 @@ function RestaurantDetails() {
     setSelectedImage(null);
   };
 
-  // const handleReserveClick = () => {
-  //   navigate(`/restaurant/${restaurantId}/new`);
-  // };
-
   const handleNavigateToImages = () => {
     navigate("images");
   };
@@ -138,7 +134,7 @@ function RestaurantDetails() {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           navigation
           pagination={{ clickable: true }}
-          loop={true} // Enables infinite scrolling
+          loop={true}
         >
           {restaurant.images.map((image, idx) => (
             <SwiperSlide key={idx}>
@@ -156,7 +152,6 @@ function RestaurantDetails() {
           ))}
         </Swiper>
       </div>
-      {/* Modal for single enlarged image*/}
       {modalOpen && selectedImage && (
         <div className="image-modal">
           <div className="image-modal-overlay" onClick={handleCloseModal}></div>
@@ -193,7 +188,6 @@ function RestaurantDetails() {
               {isOpen ? "Open Now" : "Closed"}
             </span>
 
-            {/* Add timezone display */}
             <span style={{ padding: "0 0.5em" }}>•</span>
             <span>{restaurant?.timezone?.replace("_", " ")}</span>
 
@@ -217,17 +211,22 @@ function RestaurantDetails() {
       <div id="restaurant-layout">
         <div id="restaurant-main-panel">
           <div id="restaurant-menu-buttons">
-            <div className="button-wrapper">
-              <OpenModalButton
-                className="custom-open-modal-button" // Apply the custom styles to OpenModalButton
-                buttonText={
-                  <>
-                    <IoIosStarOutline className="button-icon" /> Write a Review
-                  </>
-                }
-                modalComponent={<ReviewFormPage restaurantId={restaurant.id} />}
-              />
-            </div>
+            {!isOwner && (
+              <div className="button-wrapper">
+                <OpenModalButton
+                  className="custom-open-modal-button"
+                  buttonText={
+                    <>
+                      <IoIosStarOutline className="button-icon" /> Write a
+                      Review
+                    </>
+                  }
+                  modalComponent={
+                    <ReviewFormPage restaurantId={restaurant.id} />
+                  }
+                />
+              </div>
+            )}
 
             <button className="menu-button" onClick={handleNavigateToImages}>
               <MdAddAPhoto className="button-icon" />
@@ -250,7 +249,6 @@ function RestaurantDetails() {
               <br />
               {restaurant.city}, {restaurant.state}
             </p>
-            {/* Add timezone info */}
             <strong>Timezone: </strong>
             {restaurant?.timezone?.replace("_", " ")}
             <RestaurantHours hours={restaurant?.hours} />
@@ -262,12 +260,7 @@ function RestaurantDetails() {
         <div>
           <div className="restaurant-side-panel">
             <h3>Make a Reservation</h3>
-            {/* <button className="menu-button" onClick={handleReserveClick}>
-              Book a Table
-            </button> */}
-
             <div className="button-wrapper">
-              {" "}
               <OpenModalButton
                 className="custom-open-modal-button"
                 buttonText="Book a Table"
