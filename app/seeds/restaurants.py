@@ -13,6 +13,7 @@ def seed_restaurants():
         phone_number='(312) 929-4580',
         email='contact@auchevalchicago.com',
         website='https://www.auchevaldiner.com',
+        timezone='US/Central',
         hours={
             "Monday": ["10:00 AM", "11:15 PM"],
             "Tuesday": ["10:00 AM", "11:15 PM"],
@@ -24,7 +25,7 @@ def seed_restaurants():
         },
         cuisine='American',
         price_point=3,
-        description='Savor elevated diner fare at legendary bars in, featuring reimagined classics and  the signature cheeseburger that&apos;s a fan favorite'
+        description="Savor elevated diner fare at legendary bars in, featuring reimagined classics and  the signature cheeseburger that's a fan favorite"
     )
     restaurant2 = Restaurant(
         owner_id=2,
@@ -36,6 +37,7 @@ def seed_restaurants():
         phone_number='(415) 835-9888',
         email='info@tonyspizzanapoletana.com',
         website='https://tonyspizzanapoletana.com/',
+        timezone='US/Pacific',
         hours={
             "Monday": ["12:00 PM", "9:30 PM"],
             "Tuesday": ["12:00 PM", "9:30 PM"],
@@ -59,6 +61,7 @@ def seed_restaurants():
         phone_number='(212) 564-4409',
         email='bestbagel@gmail.com ',
         website='https://www.bestbagelandcoffee.com',
+        timezone='US/Eastern',
         hours={
             "Monday": ["6:00 AM", "4:00 PM"],
             "Tuesday": ["6:00 AM", "4:00 PM"],
@@ -82,12 +85,13 @@ def seed_restaurants():
         phone_number='(513) 802-5007',
         email='',
         website='https://www.eaglerestaurant.com/',
+        timezone="US/Eastern",
         hours={
             "Monday": ["11:00 AM", "11:00 PM"],
             "Tuesday": ["11:00 AM", "11:00 PM"],
             "Wednesday": ["11:00 AM", "11:00 PM"],
             "Thursday": ["11:00 AM", "11:00 PM"],
-            "Friday": ["11:00 AM", "12:00 AM"],
+            "Friday": ["11:00 AM", "11:00 PM"],
             "Saturday": ["11:00 AM", "12:00 AM"],
             "Sunday": ["11:00 AM", "10:00 PM"]
         },
@@ -106,6 +110,7 @@ def seed_restaurants():
         phone_number='(212) 219-0500',
         email='info@noburestaurants.com',
         website='https://www.noburestaurants.com/',
+        timezone='US/Eastern',
         hours={
             "Monday": ["5:30 PM", "11:00 PM"],
             "Tuesday": ["5:30 PM", "11:00 PM"],
@@ -129,6 +134,7 @@ def seed_restaurants():
         phone_number='(707) 944-2380',
         email='info@frenchlaundry.com',
         website='https://www.thomaskeller.com/the-french-laundry',
+        timezone='US/Pacific',
         hours={
             "Monday": ["5:00 PM", "10:00 PM"],
             "Tuesday": ["5:00 PM", "10:00 PM"],
@@ -152,6 +158,7 @@ def seed_restaurants():
         phone_number='(305) 673-0365',
         email='info@joesstonecrab.com',
         website='https://www.joesstonecrab.com/',
+        timezone="US/Eastern",
         hours={
             "Monday": ["11:30 AM", "2:30 PM"],
             "Tuesday": ["11:30 AM", "2:30 PM"],
@@ -175,6 +182,7 @@ def seed_restaurants():
         phone_number='(212) 889-0905',
         email='info@elevenmadisonpark.com',
         website='https://www.elevenmadisonpark.com/',
+        timezone="US/Eastern",
         hours={
             "Monday": ["5:30 PM", "10:00 PM"],
             "Tuesday": ["5:30 PM", "10:00 PM"],
@@ -198,6 +206,7 @@ def seed_restaurants():
         phone_number='(213) 821-1051',
         email='info@hellskitchenrestaurant.com',
         website='https://www.hellskitchenrestaurant.com/',
+        timezone="US/Pacific",
         hours={
             "Monday": ["11:00 AM", "10:00 PM"],
             "Tuesday": ["11:00 AM", "10:00 PM"],
@@ -221,6 +230,7 @@ def seed_restaurants():
         phone_number='(212) 620-0393',
         email='info@thespottedpig.com',
         website='https://www.thespottedpig.com/',
+        timezone="US/Eastern",
         hours={
             "Monday": ["12:00 PM", "11:00 PM"],
             "Tuesday": ["12:00 PM", "11:00 PM"],
@@ -235,6 +245,57 @@ def seed_restaurants():
         description='Trendy gastropub serving inventive, upscale British & American comfort fare.'
     )
 
+    restaurant11 = Restaurant(
+    owner_id=3,
+    name='Denny\'s Times Square',
+    address='150 W 38th St',
+    city='New York',
+    state='NY',
+    country='USA',
+    phone_number='(212) 768-1940',
+    email='info@dennys.com',
+    website='https://www.dennys.com',
+    timezone='US/Eastern',
+    hours={
+        "Monday": ["00:00 AM", "11:59 PM"],    # 24 hours
+        "Tuesday": ["00:00 AM", "11:59 PM"],
+        "Wednesday": ["00:00 AM", "11:59 PM"],
+        "Thursday": ["00:00 AM", "11:59 PM"],
+        "Friday": ["00:00 AM", "11:59 PM"],
+        "Saturday": ["00:00 AM", "11:59 PM"],
+        "Sunday": ["00:00 AM", "11:59 PM"]
+    },
+    cuisine='American Diner',
+    price_point=1,
+    description='Classic American diner serving breakfast, lunch and dinner 24/7.'
+)
+
+    restaurant12 = Restaurant(
+        owner_id=3,
+        name='Honolulu Kitchen',  # Example for timezone handling
+        address='2600 S King St',
+        city='Honolulu',
+        state='HI',
+        country='USA',
+        phone_number='(808) 555-1234',
+        email='info@honolulukitchen.com',
+        website='https://www.honolulukitchen.com',
+        timezone='Pacific/Honolulu',
+        hours={
+            "Monday": ["6:00 AM", "2:00 AM"],     # Late night/early morning hours
+            "Tuesday": ["6:00 AM", "2:00 AM"],
+            "Wednesday": ["6:00 AM", "2:00 AM"],
+            "Thursday": ["6:00 AM", "2:00 AM"],
+            "Friday": ["6:00 AM", "3:00 AM"],     # Extended weekend hours
+            "Saturday": ["6:00 AM", "3:00 AM"],
+            "Sunday": ["6:00 AM", "2:00 AM"]
+        },
+        cuisine='Hawaiian',
+        price_point=2,
+        description='Local Hawaiian cuisine served late into the night, perfect for early birds and night owls.'
+    )
+
+
     db.session.add(restaurant1)
     db.session.add(restaurant2)
     db.session.add(restaurant3)
@@ -245,6 +306,8 @@ def seed_restaurants():
     db.session.add(restaurant8)
     db.session.add(restaurant9)
     db.session.add(restaurant10)
+    db.session.add(restaurant11)
+    db.session.add(restaurant12)
 
     db.session.commit()
 

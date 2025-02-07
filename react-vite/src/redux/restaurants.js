@@ -42,7 +42,7 @@ export const fetchRestaurantThunk = (restaurant_id) => async (dispatch) => {
     if (response.ok) {
       const restaurant = await response.json();
       dispatch(loadRestaurant(restaurant));
-      console.log(restaurant); // Check the structure of the restaurant object
+      // console.log(restaurant); // Check the structure of the restaurant object
     } else {
       const errors = await response.json();
       dispatch(setErrors(errors));

@@ -1,7 +1,12 @@
+from datetime import datetime
+
+import pytz
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField
-from wtforms.validators import InputRequired, Optional, Length, ValidationError
+from wtforms import SelectField, StringField, TextAreaField
+from wtforms.validators import InputRequired, Length, Optional, ValidationError
+
 from ..constants import TIME_CHOICES
+
 
 # Email validator can be customized as needed
 def email_validator(form, field):
@@ -51,24 +56,31 @@ class RestaurantForm(FlaskForm):
     # Description field
     description = TextAreaField('Description', validators=[Optional(), Length(max=500)])
 
+    # Add timezone field with choices from pytz
+    timezone_choices = [(tz, tz) for tz in pytz.common_timezones_set if 'America' in tz]
+    timezone = SelectField('Timezone',
+                         choices=timezone_choices,
+                         default='America/New_York',
+                         validators=[InputRequired()])
+
     # Separate fields for opening and closing times for each day of the week
-    monday_open = SelectField('Monday Open', choices=TIME_CHOICES, default='Closed')
-    monday_close = SelectField('Monday Close', choices=TIME_CHOICES, default='Closed')
+    monday_open = SelectField('Monday Open', choices=TIME_CHOICES, default='11:30 AM')
+    monday_close = SelectField('Monday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    tuesday_open = SelectField('Tuesday Open', choices=TIME_CHOICES, default='Closed')
-    tuesday_close = SelectField('Tuesday Close', choices=TIME_CHOICES, default='Closed')
+    tuesday_open = SelectField('Tuesday Open', choices=TIME_CHOICES, default='11:30 AM')
+    tuesday_close = SelectField('Tuesday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    wednesday_open = SelectField('Wednesday Open', choices=TIME_CHOICES, default='Closed')
-    wednesday_close = SelectField('Wednesday Close', choices=TIME_CHOICES, default='Closed')
+    wednesday_open = SelectField('Wednesday Open', choices=TIME_CHOICES, default='11:30 AM')
+    wednesday_close = SelectField('Wednesday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    thursday_open = SelectField('Thursday Open', choices=TIME_CHOICES, default='Closed')
-    thursday_close = SelectField('Thursday Close', choices=TIME_CHOICES, default='Closed')
+    thursday_open = SelectField('Thursday Open', choices=TIME_CHOICES, default='11:30 AM')
+    thursday_close = SelectField('Thursday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    friday_open = SelectField('Friday Open', choices=TIME_CHOICES, default='Closed')
-    friday_close = SelectField('Friday Close', choices=TIME_CHOICES, default='Closed')
+    friday_open = SelectField('Friday Open', choices=TIME_CHOICES, default='11:30 AM')
+    friday_close = SelectField('Friday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    saturday_open = SelectField('Saturday Open', choices=TIME_CHOICES, default='Closed')
-    saturday_close = SelectField('Saturday Close', choices=TIME_CHOICES, default='Closed')
+    saturday_open = SelectField('Saturday Open', choices=TIME_CHOICES, default='11:30 AM')
+    saturday_close = SelectField('Saturday Close', choices=TIME_CHOICES, default='9:30 PM')
 
-    sunday_open = SelectField('Sunday Open', choices=TIME_CHOICES, default='Closed')
-    sunday_close = SelectField('Sunday Close', choices=TIME_CHOICES, default='Closed')
+    sunday_open = SelectField('Sunday Open', choices=TIME_CHOICES, default='11:30 AM')
+    sunday_close = SelectField('Sunday Close', choices=TIME_CHOICES, default='9:30 PM')
