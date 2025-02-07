@@ -56,19 +56,52 @@ function RestaurantDetails() {
   useEffect(() => {
     if (restaurant?.hours) {
       const today = new Date();
+
+      // Convert current time to restaurant's timezone
+      const timeInRestaurantTZ = new Date(
+        today.toLocaleString("en-US", {
+          timeZone:
+            restaurant.timezone ||
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+        })
+      );
+
       const todayHours =
-        restaurant.hours[today.toLocaleString("en-US", { weekday: "long" })];
+        restaurant.hours[
+          timeInRestaurantTZ.toLocaleString("en-US", { weekday: "long" })
+        ];
+
       if (todayHours) {
-        const [openTime, closeTime] = todayHours.map((time) =>
+        let [openTime, closeTime] = todayHours.map((time) =>
           parseTimeToMinutes(time)
         );
-        const nowMinutes = today.getHours() * 60 + today.getMinutes();
-        setIsOpen(nowMinutes >= openTime && nowMinutes <= closeTime);
+        const nowMinutes =
+          timeInRestaurantTZ.getHours() * 60 + timeInRestaurantTZ.getMinutes();
+
+        // Handle special cases
+        if (closeTime === 0) {
+          // If closing time is midnight (00:00)
+          closeTime = 24 * 60; // Convert to 1440 minutes
+        }
+
+        // Handle cases where closing time is past midnight or same as opening
+        if (closeTime <= openTime) {
+          // For Friday's case where it might be AM-AM
+          if (closeTime === openTime) {
+            setIsOpen(false); // If open and close time are same, consider it closed
+          } else {
+            // For cases like Saturday's midnight closing
+            setIsOpen(nowMinutes >= openTime || nowMinutes <= closeTime);
+          }
+        } else {
+          // Normal case
+          setIsOpen(nowMinutes >= openTime && nowMinutes <= closeTime);
+        }
       } else {
         setIsOpen(false);
       }
     }
-  }, [restaurant?.hours]);
+  }, [restaurant?.hours, restaurant?.timezone]);
 
   const handleImageClick = (index) => {
     setSelectedImage(restaurant.images[index].url);
@@ -160,6 +193,10 @@ function RestaurantDetails() {
               {isOpen ? "Open Now" : "Closed"}
             </span>
 
+            {/* Add timezone display */}
+            <span style={{ padding: "0 0.5em" }}>•</span>
+            <span>{restaurant?.timezone?.replace("_", " ")}</span>
+
             <span style={{ padding: "0 0.5em" }}></span>
             {restaurant?.price_point
               ? "$".repeat(restaurant.price_point)
@@ -213,6 +250,9 @@ function RestaurantDetails() {
               <br />
               {restaurant.city}, {restaurant.state}
             </p>
+            {/* Add timezone info */}
+            <strong>Timezone: </strong>
+            {restaurant?.timezone?.replace("_", " ")}
             <RestaurantHours hours={restaurant?.hours} />
           </div>
           <div>
@@ -254,6 +294,7 @@ function RestaurantDetails() {
                   {restaurant.address}
                   <br />
                   {restaurant.city}, {restaurant.state}
+                  <br />
                 </p>
                 <hr />
               </div>

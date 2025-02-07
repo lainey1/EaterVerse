@@ -1,7 +1,12 @@
+from datetime import datetime
+
+import pytz
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField
-from wtforms.validators import InputRequired, Optional, Length, ValidationError
+from wtforms import SelectField, StringField, TextAreaField
+from wtforms.validators import InputRequired, Length, Optional, ValidationError
+
 from ..constants import TIME_CHOICES
+
 
 # Email validator can be customized as needed
 def email_validator(form, field):
@@ -50,6 +55,13 @@ class RestaurantForm(FlaskForm):
 
     # Description field
     description = TextAreaField('Description', validators=[Optional(), Length(max=500)])
+
+    # Add timezone field with choices from pytz
+    timezone_choices = [(tz, tz) for tz in pytz.common_timezones_set if 'America' in tz]
+    timezone = SelectField('Timezone',
+                         choices=timezone_choices,
+                         default='America/New_York',
+                         validators=[InputRequired()])
 
     # Separate fields for opening and closing times for each day of the week
     monday_open = SelectField('Monday Open', choices=TIME_CHOICES, default='11:30 AM')

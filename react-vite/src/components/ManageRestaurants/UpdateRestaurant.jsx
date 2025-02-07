@@ -21,6 +21,7 @@ const UpdateRestaurant = () => {
   const [constants, setConstants] = useState({
     time_choices: [],
     popular_cuisines: [],
+    timezone_choices: [],
   });
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
@@ -103,6 +104,7 @@ const UpdateRestaurant = () => {
         cuisine: restaurant.cuisine || "",
         price_point: restaurant.price_point || "",
         description: restaurant.description || "",
+        timezone: restaurant.timezone || "",
         hours: convertedHours,
       }));
     }
@@ -165,6 +167,7 @@ const UpdateRestaurant = () => {
         "Price range is required. Please select a range from the options provided.";
     if (!formData.description || formData.description.length < 30)
       newErrors.description = "Description needs 30 or more characters";
+    if (!formData.timezone) newErrors.timezone = "Timezone is required.";
     return newErrors;
   };
 
@@ -498,6 +501,28 @@ const UpdateRestaurant = () => {
             )}
           </div>
         </section>
+
+        {/* Restaurant Timezone */}
+        <div className="form-group">
+          <label className="form-label">Timezone</label>
+          <select
+            className="form-input"
+            name="timezone"
+            value={formData.timezone}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="" disabled>
+              Select Timezone
+            </option>
+            {constants.timezone_choices.map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          {errors.timezone && <p className="form-error">{errors.timezone}</p>}
+        </div>
 
         {/* Restaurant Hours */}
         <section className="form-section">
