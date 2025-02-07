@@ -60,7 +60,7 @@ function CreateRestaurant() {
     // You can now include the csrfToken in the request headers or form data
 
     // Log form data before submitting
-    console.log("Submitting form data: ", formData);
+    // console.log("Submitting form data: ", formData);
 
     // Transform the hours data into the expected format
     const transformedData = { ...formData };
@@ -93,7 +93,7 @@ function CreateRestaurant() {
     transformedData["hours"] = hours;
 
     // Log the transformed data
-    console.log("Transformed form data: ", transformedData);
+    // console.log("Transformed form data: ", transformedData);
 
     // Send the transformed formData to the backend
     fetch("/api/restaurants/new", {
@@ -108,13 +108,13 @@ function CreateRestaurant() {
         if (data.error) {
           setError(data.error);
         } else {
-          console.log("Restaurant created:", data);
+          // console.log("Restaurant created:", data);
           navigate(`/restaurants/${data.id}`);
         }
       })
       .catch((err) => {
-        console.error("Error during form submission:", err);
-        setError("Error submitting form");
+        // console.error("Error during form submission:", err);
+        setError("Error submitting form", err);
       });
   };
 

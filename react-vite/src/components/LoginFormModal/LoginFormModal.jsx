@@ -42,14 +42,13 @@ function LoginFormModal() {
     e.preventDefault();
 
     // Dispatching the login action for demo user
-    dispatch(thunkLogin(demoUser))
-      .then(() => {
-        closeModal(); // Close modal after successful login
-        // navigate("/user/1"); // Navigate to the user page after login
-      })
-      .catch((error) => {
-        console.error("Login failed", error); // Handle error if login fails
-      });
+    dispatch(thunkLogin(demoUser)).then(() => {
+      closeModal(); // Close modal after successful login
+      // navigate("/user/1"); // Navigate to the user page after login
+    });
+    // .catch((error) => {
+    // console.error("Login failed", error); // Handle error if login fails
+    // });
   };
 
   return (

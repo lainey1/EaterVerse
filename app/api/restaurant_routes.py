@@ -260,7 +260,7 @@ def update_restaurant(restaurant_id):
 
     # Get data from the request
     data = request.get_json()
-    print(data)
+    # print(data)
 
     # Validate required fields
     required_fields = ['name', 'address', 'city', 'state', 'country', 'hours']
