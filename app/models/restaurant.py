@@ -21,6 +21,7 @@ class Restaurant(db.Model):
     phone_number = db.Column(db.String(15), nullable=True)
     email = db.Column(db.String(255), nullable=True)
     website = db.Column(db.String(255), nullable=True)
+    timezone = db.Column(db.String(50), nullable=False, default='America/Los_Angeles')
     hours = db.Column(db.JSON, nullable=True)
     cuisine = db.Column(db.String(50), nullable=False)
     price_point = db.Column(db.Integer, nullable=False)
@@ -71,6 +72,7 @@ class Restaurant(db.Model):
             "price_point": self.price_point,
             "description": self.description,
             'preview_image': preview_image.url if preview_image else None,
+            'timezone': self.timezone,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }

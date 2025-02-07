@@ -56,19 +56,52 @@ function RestaurantDetails() {
   useEffect(() => {
     if (restaurant?.hours) {
       const today = new Date();
+
+      // Convert current time to restaurant's timezone
+      const timeInRestaurantTZ = new Date(
+        today.toLocaleString("en-US", {
+          timeZone:
+            restaurant.timezone ||
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+        })
+      );
+
       const todayHours =
-        restaurant.hours[today.toLocaleString("en-US", { weekday: "long" })];
+        restaurant.hours[
+          timeInRestaurantTZ.toLocaleString("en-US", { weekday: "long" })
+        ];
+
       if (todayHours) {
-        const [openTime, closeTime] = todayHours.map((time) =>
+        let [openTime, closeTime] = todayHours.map((time) =>
           parseTimeToMinutes(time)
         );
-        const nowMinutes = today.getHours() * 60 + today.getMinutes();
-        setIsOpen(nowMinutes >= openTime && nowMinutes <= closeTime);
+        const nowMinutes =
+          timeInRestaurantTZ.getHours() * 60 + timeInRestaurantTZ.getMinutes();
+
+        // Handle special cases
+        if (closeTime === 0) {
+          // If closing time is midnight (00:00)
+          closeTime = 24 * 60; // Convert to 1440 minutes
+        }
+
+        // Handle cases where closing time is past midnight or same as opening
+        if (closeTime <= openTime) {
+          // For Friday's case where it might be AM-AM
+          if (closeTime === openTime) {
+            setIsOpen(false); // If open and close time are same, consider it closed
+          } else {
+            // For cases like Saturday's midnight closing
+            setIsOpen(nowMinutes >= openTime || nowMinutes <= closeTime);
+          }
+        } else {
+          // Normal case
+          setIsOpen(nowMinutes >= openTime && nowMinutes <= closeTime);
+        }
       } else {
         setIsOpen(false);
       }
     }
-  }, [restaurant?.hours]);
+  }, [restaurant?.hours, restaurant?.timezone]);
 
   const handleImageClick = (index) => {
     setSelectedImage(restaurant.images[index].url);
@@ -105,7 +138,7 @@ function RestaurantDetails() {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           navigation
           pagination={{ clickable: true }}
-          loop={true} // Enables infinite scrolling
+          loop={true}
         >
           {restaurant.images.map((image, idx) => (
             <SwiperSlide key={idx}>
@@ -123,7 +156,6 @@ function RestaurantDetails() {
           ))}
         </Swiper>
       </div>
-      {/* Modal for single enlarged image*/}
       {modalOpen && selectedImage && (
         <div className="image-modal">
           <div className="image-modal-overlay" onClick={handleCloseModal}></div>
@@ -160,6 +192,9 @@ function RestaurantDetails() {
               {isOpen ? "Open Now" : "Closed"}
             </span>
 
+            <span style={{ padding: "0 0.5em" }}>•</span>
+            <span>{restaurant?.timezone?.replace("_", " ")}</span>
+
             <span style={{ padding: "0 0.5em" }}></span>
             {restaurant?.price_point
               ? "$".repeat(restaurant.price_point)
@@ -180,17 +215,22 @@ function RestaurantDetails() {
       <div id="restaurant-layout">
         <div id="restaurant-main-panel">
           <div id="restaurant-menu-buttons">
-            <div className="button-wrapper">
-              <OpenModalButton
-                className="custom-open-modal-button" // Apply the custom styles to OpenModalButton
-                buttonText={
-                  <>
-                    <IoIosStarOutline className="button-icon" /> Write a Review
-                  </>
-                }
-                modalComponent={<ReviewFormPage restaurantId={restaurant.id} />}
-              />
-            </div>
+            {!isOwner && (
+              <div className="button-wrapper">
+                <OpenModalButton
+                  className="custom-open-modal-button"
+                  buttonText={
+                    <>
+                      <IoIosStarOutline className="button-icon" /> Write a
+                      Review
+                    </>
+                  }
+                  modalComponent={
+                    <ReviewFormPage restaurantId={restaurant.id} />
+                  }
+                />
+              </div>
+            )}
 
             <button className="menu-button" onClick={handleNavigateToImages}>
               <MdAddAPhoto className="button-icon" />
@@ -213,6 +253,8 @@ function RestaurantDetails() {
               <br />
               {restaurant.city}, {restaurant.state}
             </p>
+            <strong>Timezone: </strong>
+            {restaurant?.timezone?.replace("_", " ")}
             <RestaurantHours hours={restaurant?.hours} />
           </div>
           <div>
@@ -222,12 +264,7 @@ function RestaurantDetails() {
         <div>
           <div className="restaurant-side-panel">
             <h3>Make a Reservation</h3>
-            {/* <button className="menu-button" onClick={handleReserveClick}>
-              Book a Table
-            </button> */}
-
             <div className="button-wrapper">
-              {" "}
               <OpenModalButton
                 className="custom-open-modal-button"
                 buttonText="Book a Table"
@@ -254,6 +291,7 @@ function RestaurantDetails() {
                   {restaurant.address}
                   <br />
                   {restaurant.city}, {restaurant.state}
+                  <br />
                 </p>
                 <hr />
               </div>

@@ -26,7 +26,7 @@ def seed_restaurant_image():
         RestaurantImage(
             restaurant_id=1,
             user_id=2,
-            url='http://www.sedbona.com/wp-content/uploads/2018/05/Au-Cheval-Chicago-36.jpg',
+            url='https://images.squarespace-cdn.com/content/v1/66e88482bbf8191c95a0db67/54a482af-1cc2-49e6-a833-04cc7ecd1ce4/auc1-20.jpg',
             is_preview=False
         ),
         RestaurantImage(
@@ -44,13 +44,13 @@ def seed_restaurant_image():
         RestaurantImage(
             restaurant_id=1,
             user_id=2,
-            url='http://www.sedbona.com/wp-content/uploads/2018/05/Au-Cheval-Chicago-25.jpg',
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/pDFkSGVlvNJeOniKmwHo9g/348s.jpg',
             is_preview=False
         ),
         RestaurantImage(
             restaurant_id=1,
             user_id=3,
-            url='https://media-cdn.tripadvisor.com/media/photo-p/0d/da/82/ac/foie-gras-with-scrambled.jpg',
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/B9-b2TewB9RF0jreJYi28w/o.jpgg',
             is_preview=False
         ),
 
@@ -217,6 +217,30 @@ def seed_restaurant_image():
             restaurant_id=10,
             user_id=2,
             url='https://cdn.vox-cdn.com/thumbor/RXRPEDVJN-LCKX6RlPwpbBunMyw=/0x0:1000x668/3070x1727/filters:focal(420x254:580x414):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/51782969/20140623-001-Spotted_20Pig.0__1_.0.0.jpg',
+            is_preview=False
+        ),
+        RestaurantImage(
+            restaurant_id=11,
+            user_id=3,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/0cFe9oAoFcuiHJTnTf7pGA/o.jpg',
+            is_preview=True
+        ),
+         RestaurantImage(
+            restaurant_id=11,
+            user_id=2,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/P8ST_4HgXeperbTouYviVg/o.jpg',
+            is_preview=False
+        ),
+        RestaurantImage(
+            restaurant_id=12,
+            user_id=2,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/UCmKZurK8KLd7izGjD4yvA/o.jpg',
+            is_preview=True
+        ),
+         RestaurantImage(
+            restaurant_id=12,
+            user_id=1,
+            url='https://s3-media0.fl.yelpcdn.com/bphoto/fDg5U_kDgeQ4CNIiTemkLg/o.jpg',
             is_preview=False
         ),
     ]

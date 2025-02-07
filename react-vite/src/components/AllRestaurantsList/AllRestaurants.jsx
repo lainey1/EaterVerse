@@ -97,6 +97,7 @@ function AllRestaurants() {
           );
         })}
       </div>
+      <br />
 
       {/* Pagination Controls */}
       <div className="pagination">

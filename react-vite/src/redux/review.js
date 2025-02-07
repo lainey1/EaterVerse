@@ -111,7 +111,7 @@ export const updateExistingReview =
   };
 
 export const deleteExistingReview = (reviewId) => async (dispatch) => {
-  console.log("hitting thunk");
+  // console.log("hitting thunk");
   try {
     const response = await fetch(`/api/reviews/${reviewId}`, {
       method: "DELETE",
