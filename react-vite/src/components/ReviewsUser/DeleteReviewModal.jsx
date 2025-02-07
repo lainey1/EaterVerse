@@ -10,7 +10,7 @@ function DeleteReviewModal({ review }) {
 
   const handleDelete = async () => {
     try {
-      console.log(review.id);
+      // console.log(review.id);
       await dispatch(deleteExistingReview(review.id));
       closeModal();
     } catch (err) {

@@ -41,7 +41,7 @@ export const deleteReservation = (reservationId) => ({
 // Thunk Action Creators handle async logic using redux-thunk middleware to dispatch actions and access the current state.
 export const fetchReservationThunk = (reservation_id) => async (dispatch) => {
   try {
-    console.log("hitting thunk");
+    // console.log("hitting thunk");
     const response = await fetch(`/api/reservations/${reservation_id}`);
 
     if (response.ok) {
