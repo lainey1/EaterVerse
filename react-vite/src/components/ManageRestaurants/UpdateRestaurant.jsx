@@ -105,7 +105,6 @@ const UpdateRestaurant = () => {
         price_point: restaurant.price_point || "",
         description: restaurant.description || "",
         timezone: restaurant.timezone || "",
-        hours: convertedHours,
       }));
     }
   }, [restaurant]);
