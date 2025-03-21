@@ -1,3 +1,5 @@
+#app/config.py
+
 import os
 
 
@@ -5,6 +7,8 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     FLASK_RUN_PORT = os.environ.get('FLASK_RUN_PORT')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    GOOGLE_MAPS_API_KEY = os.environ.get('MAPS_API_KEY')
+    GOOGLE_MAPS_ID = os.environ.get('MAPS_ID')
     # SQLAlchemy 1.4 no longer supports url strings that start with 'postgres'
     # (only 'postgresql') but heroku's postgres add-on automatically sets the
     # url in the hidden config vars to start with postgres.

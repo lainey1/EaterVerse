@@ -1,3 +1,5 @@
+// react-vite/src/components/RestaurantDetails/RestaurantDetails.jsx
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,6 +14,7 @@ import "swiper/css/pagination";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ReviewFormPage from "../ReviewFormPage/ReviewFormPage";
 import CreateReservations from "../Reservations/CreateReservations";
+import RestaurantMapWrapper from "../RestaurantMap/RestaurantMap";
 
 import { IoIosInformationCircle, IoIosStarOutline } from "react-icons/io";
 import { MdAddAPhoto, MdClose } from "react-icons/md";
@@ -244,11 +247,8 @@ function RestaurantDetails() {
           </div>
           <div className="sub-panel">
             <h3>Location & Hours</h3>
-            <p>
-              {restaurant.address}
-              <br />
-              {restaurant.city}, {restaurant.state}
-            </p>
+            {/* Adding map component */}
+            <RestaurantMapWrapper restaurant={restaurant} />
             <strong>Timezone: </strong>
             {restaurant?.timezone?.replace("_", " ")}
             <RestaurantHours hours={restaurant?.hours} />
@@ -257,6 +257,7 @@ function RestaurantDetails() {
             <ReviewsRestaurant />
           </div>
         </div>
+
         <div>
           <div className="restaurant-side-panel">
             <h3>Make a Reservation</h3>

@@ -10,6 +10,8 @@ def seed_restaurants():
         city='Chicago',
         state='IL',
         country='USA',
+        latitude=41.884567,
+        longitude=-87.647713,
         phone_number='(312) 929-4580',
         email='contact@auchevalchicago.com',
         website='https://www.auchevaldiner.com',
@@ -34,6 +36,8 @@ def seed_restaurants():
         city='San Francisco',
         state='CA',
         country='USA',
+        latitude=37.800342,
+        longitude=-122.409487,
         phone_number='(415) 835-9888',
         email='info@tonyspizzanapoletana.com',
         website='https://tonyspizzanapoletana.com/',
@@ -58,6 +62,8 @@ def seed_restaurants():
         city='New York',
         state='NY',
         country='USA',
+        latitude=40.752647,
+        longitude=-73.991508,
         phone_number='(212) 564-4409',
         email='bestbagel@gmail.com ',
         website='https://www.bestbagelandcoffee.com',
@@ -75,6 +81,7 @@ def seed_restaurants():
         price_point=1,
         description='Unleash Your Inner Foodie with Our Delicious Bagels.'
     )
+
     restaurant4 = Restaurant(
         owner_id=1,
         name='The Eagle OTR',
@@ -82,6 +89,8 @@ def seed_restaurants():
         city='Cincinnati',
         state='OH',
         country='USA',
+        latitude=39.111846,
+        longitude=-84.515887,
         phone_number='(513) 802-5007',
         email='',
         website='https://www.eaglerestaurant.com/',
@@ -107,6 +116,8 @@ def seed_restaurants():
         city='New York',
         state='NY',
         country='USA',
+        latitude=40.719692,
+        longitude=-74.008848,
         phone_number='(212) 219-0500',
         email='info@noburestaurants.com',
         website='https://www.noburestaurants.com/',
@@ -124,6 +135,7 @@ def seed_restaurants():
         price_point=5,
         description='Upscale sushi and Japanese dishes in sleek, minimalist surroundings.'
     )
+
     restaurant6 = Restaurant(
         owner_id=1,
         name='The French Laundry',
@@ -131,6 +143,8 @@ def seed_restaurants():
         city='Yountville',
         state='CA',
         country='USA',
+        latitude=38.404107,
+        longitude=-122.364350,
         phone_number='(707) 944-2380',
         email='info@frenchlaundry.com',
         website='https://www.thomaskeller.com/the-french-laundry',
@@ -146,8 +160,9 @@ def seed_restaurants():
         },
         cuisine='French',
         price_point=5,
-        description='Thomas Keller’s acclaimed fine dining destination with a renowned tasting menu.'
+        description="Thomas Keller's acclaimed fine dining destination with a renowned tasting menu."
     )
+
     restaurant7 = Restaurant(
         owner_id=2,
         name='Joe\'s Stone Crab',
@@ -155,6 +170,8 @@ def seed_restaurants():
         city='Miami Beach',
         state='FL',
         country='USA',
+        latitude=25.767914,
+        longitude=-80.132457,
         phone_number='(305) 673-0365',
         email='info@joesstonecrab.com',
         website='https://www.joesstonecrab.com/',
@@ -179,6 +196,8 @@ def seed_restaurants():
         city='New York',
         state='NY',
         country='USA',
+        latitude=40.741492,
+        longitude=-73.987823,
         phone_number='(212) 889-0905',
         email='info@elevenmadisonpark.com',
         website='https://www.elevenmadisonpark.com/',
@@ -203,6 +222,8 @@ def seed_restaurants():
         city='Los Angeles',
         state='CA',
         country='USA',
+        latitude=34.051254,
+        longitude=-118.263468,
         phone_number='(213) 821-1051',
         email='info@hellskitchenrestaurant.com',
         website='https://www.hellskitchenrestaurant.com/',
@@ -218,7 +239,7 @@ def seed_restaurants():
         },
         cuisine='Contemporary American',
         price_point=4,
-        description='Gordon Ramsay’s celebrated restaurant featuring a signature “Hell’s Kitchen” experience.'
+        description="Gordon Ramsay's celebrated restaurant featuring a signature Hell's Kitchen experience."
     )
     restaurant10 = Restaurant(
         owner_id=2,
@@ -227,6 +248,8 @@ def seed_restaurants():
         city='New York',
         state='NY',
         country='USA',
+        latitude=40.735638,
+        longitude=-74.007147,
         phone_number='(212) 620-0393',
         email='info@thespottedpig.com',
         website='https://www.thespottedpig.com/',
@@ -246,29 +269,31 @@ def seed_restaurants():
     )
 
     restaurant11 = Restaurant(
-    owner_id=3,
-    name='Denny\'s Times Square',
-    address='150 W 38th St',
-    city='New York',
-    state='NY',
-    country='USA',
-    phone_number='(212) 768-1940',
-    email='info@dennys.com',
-    website='https://www.dennys.com',
-    timezone='US/Eastern',
-    hours={
-        "Monday": ["00:00 AM", "11:59 PM"],    # 24 hours
-        "Tuesday": ["00:00 AM", "11:59 PM"],
-        "Wednesday": ["00:00 AM", "11:59 PM"],
-        "Thursday": ["00:00 AM", "11:59 PM"],
-        "Friday": ["00:00 AM", "11:59 PM"],
-        "Saturday": ["00:00 AM", "11:59 PM"],
-        "Sunday": ["00:00 AM", "11:59 PM"]
-    },
-    cuisine='American Diner',
-    price_point=1,
-    description='Classic American diner serving breakfast, lunch and dinner 24/7.'
-)
+        owner_id=3,
+        name='Denny\'s Times Square',
+        address='150 W 38th St',
+        city='New York',
+        state='NY',
+        country='USA',
+        latitude=40.753662,
+        longitude=-73.988114,
+        phone_number='(212) 768-1940',
+        email='info@dennys.com',
+        website='https://www.dennys.com',
+        timezone='US/Eastern',
+        hours={
+            "Monday": ["00:00 AM", "11:59 PM"],    # 24 hours
+            "Tuesday": ["00:00 AM", "11:59 PM"],
+            "Wednesday": ["00:00 AM", "11:59 PM"],
+            "Thursday": ["00:00 AM", "11:59 PM"],
+            "Friday": ["00:00 AM", "11:59 PM"],
+            "Saturday": ["00:00 AM", "11:59 PM"],
+            "Sunday": ["00:00 AM", "11:59 PM"]
+        },
+        cuisine='American Diner',
+        price_point=1,
+        description='Classic American diner serving breakfast, lunch and dinner 24/7.'
+    )
 
     restaurant12 = Restaurant(
         owner_id=3,
@@ -277,6 +302,8 @@ def seed_restaurants():
         city='Honolulu',
         state='HI',
         country='USA',
+        latitude=21.293872,
+        longitude=-157.827791,
         phone_number='(808) 555-1234',
         email='info@honolulukitchen.com',
         website='https://www.honolulukitchen.com',
@@ -310,6 +337,7 @@ def seed_restaurants():
     db.session.add(restaurant12)
 
     db.session.commit()
+
 
 # Uses a raw SQL query to TRUNCATE or DELETE the restaurants table.
 # SQLAlchemy doesn't have a built-in function to do this.
