@@ -116,6 +116,10 @@ function RestaurantDetails() {
     setSelectedImage(null);
   };
 
+  // const handleReserveClick = () => {
+  //   navigate(`/restaurant/${restaurantId}/new`);
+  // };
+
   const handleNavigateToImages = () => {
     navigate("images");
   };

@@ -19,6 +19,7 @@ const rootReducer = combineReducers({
   restaurantImages: restaurantImagesReducer,
   reviews: reviewsReducer,
   session: sessionReducer,
+  reservations: reservationsReducer,
 });
 
 let enhancer;

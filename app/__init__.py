@@ -15,6 +15,7 @@ from .api.review_routes import review_routes
 from .api.search_routes import search_routes
 from .api.user_routes import user_routes
 from .api.maps_routes import maps_routes
+
 from .config import Config
 from .models import User, db
 from .seeds import seed_commands
@@ -47,6 +48,7 @@ app.register_blueprint(reservation_routes, url_prefix='/api/reservations')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 app.register_blueprint(restaurant_images, url_prefix='/api/restaurant_images')
 app.register_blueprint(maps_routes, url_prefix='/api/maps')
+
 
 # Initialize Packages
 

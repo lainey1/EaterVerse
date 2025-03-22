@@ -110,6 +110,7 @@ def seed_restaurants():
     )
 
     restaurant5 = Restaurant(
+
         owner_id=2,
         name='Nobu',
         address='105 Hudson St',
@@ -241,6 +242,7 @@ def seed_restaurants():
         price_point=4,
         description="Gordon Ramsay's celebrated restaurant featuring a signature Hell's Kitchen experience."
     )
+    
     restaurant10 = Restaurant(
         owner_id=2,
         name='The Spotted Pig',
