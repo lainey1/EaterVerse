@@ -1,0 +1,44 @@
+/* src/components/RestaurantMap/RestaurantMap.css */
+.restaurant-map-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+#restaurant-map {
+  width: 100%;
+  height: 100%;
+}
+
+.restaurant-map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 14px;
+}
+
+.get-directions-button {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background-color: #4285f4;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.get-directions-button:hover {
+  background-color: #3367d6;
+  text-decoration: none;
+  color: white;
+}

@@ -18,6 +18,8 @@ class Restaurant(db.Model):
     city = db.Column(db.String(100), nullable=False)
     state = db.Column(db.String(100), nullable=False)
     country = db.Column(db.String(100), nullable=False)
+    latitude = db.Column(db.Float, nullable=True)
+    longitude = db.Column(db.Float, nullable=True)
     phone_number = db.Column(db.String(15), nullable=True)
     email = db.Column(db.String(255), nullable=True)
     website = db.Column(db.String(255), nullable=True)
@@ -65,6 +67,8 @@ class Restaurant(db.Model):
             "city": self.city,
             "state": self.state,
             "country": self.country,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
             "phone_number": self.phone_number,
             "email": self.email,
             "website": self.website,

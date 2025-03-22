@@ -10,12 +10,15 @@ import restaurantsReducer from "./restaurants";
 import reviewsReducer from "./review";
 import restaurantImagesReducer from "./restaurantImages";
 import reservationsReducer from "./reservations";
+import mapsReducer from "./maps";
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+  maps: mapsReducer,
+  reservations: reservationsReducer,
   restaurants: restaurantsReducer,
-  reviews: reviewsReducer,
   restaurantImages: restaurantImagesReducer,
+  reviews: reviewsReducer,
+  session: sessionReducer,
   reservations: reservationsReducer,
 });
 
